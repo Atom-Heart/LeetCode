@@ -4,7 +4,7 @@ public:
 	vector<string> res;
 	vector<string> removeInvalidParentheses(string s) {
 		int left = 0, right = 0;//保存s中左右括号多余的个数
-		/*统计出了左右括号多余的个数*/
+		/*统计出了左右括号多余的个数,)(这种情况也能判断*/
 		for (auto ch : s) {
 			if (ch == '(') {//记录左括号的个数
 				left++;
