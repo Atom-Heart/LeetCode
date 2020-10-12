@@ -1,6 +1,7 @@
+/*方法一：回溯（超时）*/
 class Solution {
 public:
-    vector<vector<string>> ans;
+    int ans = INT_MAX;
     bool isPalindrome(string s){
         if(s.size() == 1) return true;
         int begin = 0;
@@ -13,10 +14,12 @@ public:
         }
         return true;
     }
-    
+
     void backTracking(string s, vector<string>& route, int begin){
         if(begin == s.size()){
-            ans.push_back(route);
+            if(route.size() < ans){
+                ans = route.size();
+            }
             return;
         }
 
@@ -35,12 +38,9 @@ public:
             }
         }
     }
-
-
-    vector<vector<string>> partition(string s) {
+    int minCut(string s) {
         vector<string> route;
         backTracking(s, route, 0);
-        return ans;
+        return ans - 1;
     }
 };
-

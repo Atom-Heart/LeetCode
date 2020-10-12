@@ -38,3 +38,49 @@ public:
         return s.substr(start, max_len);
     }
 };
+/*方法二：dp*/
+class Solution {
+public:
+    int minCut(string s) {
+        int n = s.size();
+        vector<vector<bool>> dp(n, vector<bool>(n, false));
+
+        for(int i = 0; i < n; i++){
+            dp[i][i] = true;
+        }
+        for(int j = 1; j < n; j++){
+            for(int i = 0; i < j; i++){
+                if(s[i] == s[j]){
+                    if(j - i < 3){
+                        dp[i][j] = true;
+                    }
+                    else{
+                        dp[i][j] = dp[i + 1][j - 1];
+                    }
+                }
+                else{
+                    dp[i][j] = false;
+                }
+            }
+        }
+
+        vector<int> f(n);
+        for(int i = 0; i < n; i++){
+            f[i] = i;
+        }
+
+        for(int i = 1; i < n; i++){
+            if(dp[0][i] == true) {
+                f[i] = 0;
+                continue;
+            }
+
+            for(int j = 0; j < i; j++){
+                if(dp[j + 1][i] == true){
+                    f[i] = min(f[i], f[j] + 1);
+                }
+            }
+        }
+        return f[n - 1];
+    }
+};
