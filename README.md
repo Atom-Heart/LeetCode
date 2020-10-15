@@ -40,7 +40,7 @@
 
 题目|知识点|
 :-|:-|
-|[7. 整数反转](https://leetcode-cn.com/problems/reverse-integer/)|C++中遇到int溢出时的判断方法 —> 大7负8|
+|[7. 整数反转](https://leetcode-cn.com/problems/reverse-integer/)|C++中遇到int溢出时的判断方法 —> 大7负8：**乘除法防止溢出**|
 |[29. 两数相除](https://leetcode-cn.com/problems/divide-two-integers/)|需要考虑到int型越界问题|
 |[172. 阶乘后的零](https://leetcode-cn.com/problems/factorial-trailing-zeroes/)|计算`n!`可以分解出多少个因子2和5，进一步简化为计算有多少5，再进一步优化如何能更快计算出有多少因子5|
 
@@ -113,8 +113,11 @@
 ## 数学
 |题目|知识点|
 :-|:-|
+|[169. 求众数I](https://leetcode-cn.com/problems/majority-element/)|找到一个数字的出现个数是大于n/2的，利用**摩尔投票法**，数字相同就将计数值加1，不相同就减1，如果减到零就换人，最后剩下的那个元素就是答案|
+|:star:[172. 阶乘后的零](https://leetcode-cn.com/problems/factorial-trailing-zeroes/)|这道题绝不能真的把阶乘算出来。**两个数组相乘末尾产生零一定是因为两个数有因子2和5**，所以问题可以转化为计算`n!`最多可以分解出多少2和5？有因为2比5多，所有问题又能转化为`n!`最多能分解出多少5|
 |[202. 快乐数](https://leetcode-cn.com/problems/happy-number/)|一个数可以转化为其每一位的数的平方之和，判断最终能不能转化为1.类似与求环问题，可以往双指针上去思考|
 |[**204. 计数质数**](https://leetcode-cn.com/problems/count-primes/)|判断素数的时候可以优化，只需要在[2, sqrt(n)]范围内看能不能被整除就可以了。更优化的算法是空间换时间，当一个数是素数时，这个数的倍数都不是素数。在这个基础上还能优化|
+|[229. 求众数 II](https://leetcode-cn.com/problems/majority-element-ii/)|**如果要选出现个数超过n/m(2,3,4,5,6)的元素，那么最多有m - 1个答案**。这道题让求大于n/3的答案，所以最多有两个数。同样利用**摩尔投票法**，创建两个候选人，然后遍历整个数组去配对，然后检查候选人的票数是否大于n/3|
 
 ## Morris算法
 |题目|知识点|讲解|
@@ -214,6 +217,12 @@
 |题目|知识点|
 :-|:-|
 |||
+
+## 栈
+|题目|知识点|
+:-|:-|
+|[224. 基本计算器](https://leetcode-cn.com/problems/basic-calculator/)|方法一：中缀表达式转后缀表达式，然后再计算后缀表达式。方法二：双栈法，一个栈放运算数，一个栈放运算符，在遍历的过程中就直接计算|
+|[227. 基本计算器 II](https://leetcode-cn.com/problems/basic-calculator-ii/)|整体思路和上一个题一样，主要注意**运算符的优先级导致的计算顺序问题**|
 
 ## 堆
 |题目|知识点|
