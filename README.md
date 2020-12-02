@@ -7,6 +7,7 @@
 题目|知识点|
 :-|:-|
 |[494. 目标和](https://leetcode-cn.com/problems/target-sum/)|回溯超时，可以转化为子集背包问题
+|[474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)|选择求和问题，可以转化成01背包|
 
 ### 2.博奕型DP
 |题目|知识点|
@@ -27,10 +28,12 @@
 |[413. 等差数列划分](https://leetcode-cn.com/problems/arithmetic-slices/)|基本题目，考察如何选取状态和初始值。数学做法很巧妙，利用了**差分数组**|
 
 
+
 ### 4.区间DP
 |题目|知识点|
 :-|:-|
 |:star:[375. 猜数字大小 II](https://leetcode-cn.com/problems/guess-number-higher-or-lower-ii/)|**博弈思想+区间DP+最坏情况最优解**，状态表示：一.集合：i~j猜数字，最坏情况得到的最低成本。2.属性：最小值。二、状态计算：`dp[i][j] = min(dp[i][j], max(dp[i][k - 1], dp[k + 1][j]) + k)`|
+|:fire::star:[516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)|两个元素相等：`if(s[i] == s[j]) dp[i][j] = dp[i + 1][j - 1] + 2;`。**两个元素不相等：**`dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])`。**要注意填表顺序**|
 
 ### 5.树型DP
 |题目|知识点|
@@ -119,6 +122,7 @@
 ## 双指针
 |题目|知识点|
 :-|:-|
+|:fire::star:[18. 四数之和](https://leetcode-cn.com/problems/4sum/)|**四指针+去重**，用两个for循环表示前两个指针，在进行双指针查找，这道题的去重手法很重要，重点看|
 |[26. 删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)|一个指针指向能插入的位置，另一个指针指向待插入的元素。判断一个数是不是能被插入的方法是：判断这个数是不是和前一个数相等|
 |:star:[56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)|如果区间重复，则将区间合并为一个区间。**经典字符串题目**|
 |[80. 删除排序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/)|这个题和前一道题的区别在于，这道题可以允许有一个数字出现两次。这两道题不难，但写出简洁的代码是有难度的|
@@ -169,6 +173,7 @@
 |[367. 有效的完全平方数](https://leetcode-cn.com/problems/valid-perfect-square/)|和69题的方法一样，**二分查找**|
 |[384. 打乱数组](https://leetcode-cn.com/problems/shuffle-an-array/)|**洗牌算法**：具体做法就是遍历每一个位置，然后和大于等于当前位置的一个位置上的数交换|
 |[400. 第N个数字](https://leetcode-cn.com/problems/nth-digit/)|考察了对于数字的敏感程度，涉及到取余、定位数字的位数，定位具体数字等操作，细节很多|
+|:fire::star:[504. 七进制数](https://leetcode-cn.com/problems/base-7/)|**十进制转换为其他进制--->除留取余法，然后逆置**|
 |[670. 最大交换](https://leetcode-cn.com/problems/maximum-swap/)|之多交换一次字符串表示的数字中的两个数字，使得数字最大。先排序，然后找出两个数字第一个不同的位，就是待交换的数字|
 |:star:[842. 将数组拆分成斐波那契序列](https://leetcode-cn.com/problems/split-array-into-fibonacci-sequence/)|**为预防当字符串转整型出现溢出，可以在操作前判断是否溢出**|
 
@@ -177,6 +182,16 @@
 :-|:-|:-|
 |[324. 摆动排序 II](https://leetcode-cn.com/problems/wiggle-sort-ii/)|要求把数字排列成`nums[i]<nums[i+1]>nums[i+2]<...`。可以考虑把串数字先排序，然后再一分为二，然后交替插入新的数组中，陷阱在于如果前后两个数组出现了相同的数字，会导致最终结果出现多个相同数字相邻的情况|
 |[327. 区间和的个数](https://leetcode-cn.com/problems/count-of-range-sum/)|方法一：使用的multise容器和它的方法lower_bound、upper_bound、distance。**通过multiset无序转有序，在multiset中使用二分搜索**。方法二：**利用归并排序思想**，没做。这题很难|
+
+## 前缀和
+|题目|知识点|讲解|
+:-|:-|:-|
+|:star:[303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/)||
+|:star:[304. 二维区域和检索 - 矩阵不可变](https://leetcode-cn.com/problems/range-sum-query-2d-immutable/)||
+|:star:[523. 连续的子数组和](https://leetcode-cn.com/problems/continuous-subarray-sum/)|**前缀和 + Hash(值和下标的映射) + 数学**，`(preSum[i] - preSum[j]) % k == 0`相当于`preSum[i] % k == preSum[j] % k`|
+|:star:[1314. 矩阵区域和](https://leetcode-cn.com/problems/matrix-block-sum/)||
+
+|:star:[1664. 生成平衡数组的方案数](https://leetcode-cn.com/problems/ways-to-make-a-fair-array/)|创建**奇数项的前缀和**和**偶数项的前缀和**，主要难点在奇偶前缀和数组所代表的意义，先来考虑一下普通的前缀数组所代表的意义：`nums[i],0<=i<=n - 1`，`preSum[i],0<=i<=n`，`preSum[i]`有两种解释的方法：1.原数组第i项之前的前缀和（i = 0, 1, ...., n）2.用原数组的下标访问前缀和数组，原数组前i项（不包括`nums[i]`）的前缀和。   `oddPreSum[i],0 <= i <= n`表示原数组中前i项（不包括`nums[i]`）中奇数的前缀和|
 
 ## 设计
 |题目|知识点|讲解|
@@ -224,6 +239,8 @@
 |[303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/)|利用**前缀和**技巧提高查询区间和的速度|
 |:star:[442. 数组中重复的数据](https://leetcode-cn.com/problems/find-all-duplicates-in-an-array/)|**将数组元素映射为数组下标，原地取反表示已经被访问过**，要注意这个条件`1 ≤ a[i] ≤ n (n = 数组大小)的整型数组`|
 |[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)|和**442**使用了相同的思想|
+|[463. 岛屿的周长](https://leetcode-cn.com/problems/island-perimeter/)|常规方法是DFS。但是可以利用**岛屿数量和相邻的边数计算周长**|
+|:fire::star:[498. 对角线遍历](https://leetcode-cn.com/problems/diagonal-traverse/)|技巧性极度强|
 
 ## 位操作
 
@@ -241,6 +258,7 @@
 |:star:[318. 最大单词长度乘积](https://leetcode-cn.com/problems/maximum-product-of-word-lengths/)|这道题最难的点在于如何判断两个单词是否不包含相同字母。一个int类型数有32位，26个英文字母每个对应一位，把单词中所有字母的相应位置1，然后两个单词做位与运算，如果结果是0，说明包含的字母不存在相同的|
 |:star:[371. 两整数之和](https://leetcode-cn.com/problems/sum-of-two-integers/)|**两数相与相当于是做了不进位加法；两数异或再右移一位相当于计算出两数加法的进位**，将相与和异或右移一位的结果相加知道进位为0，就得到了最终结果。至于为什么减法也能当加法来做，这归功于**补码**|
 |:star:[405. 数字转换为十六进制数](https://leetcode-cn.com/problems/convert-a-number-to-hexadecimal/)|**模板题，C++不允许对负数执行移位运算，在对负数进行移位运算的时候需要把int转换成unsigned int**|
+|:star:[476. 数字的补数](https://leetcode-cn.com/problems/number-complement/)|**1.构造一个n位全1的数字t。2.用这个数字和原数字做异或操作**，这样就可以得到原数字的补码。**正整数不包括0**|
 
 ## 树
 
@@ -258,6 +276,8 @@
 |[257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)|分治和DFS都可以做|
 |:star:[297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)|将一颗二叉树序列化，有前序和中序两种序列可以选择，然后又可以通过序列化的结果重构这颗二叉树。**前序序列化充分利用了分治的思想**，十分巧妙|
 |[331. 验证二叉树的前序序列化](https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/)|方法一：利用了297的思想，看该序列能否重构一个二叉树|
+|:fire::star:[450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)|分三种情况：1.待删除结点是叶子结点，直接将该结点赋值为`nullptr`。2.待删除结点只有左子树或右子树，将左儿子或右儿子赋值给待删除结点。3.如果既有左子树又有右子树，那就找待删除结点的后继结点，然后将后继结点的值赋给待删除结点，然后递归删除后继结点的值|
+|[501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/)|**可以想象为在有序数组里面找众数**，利用BST的性质，中序遍历的结果是递增序列，设置**前驱结点**|
 
 
 ## 字符串
@@ -266,6 +286,8 @@
 :-|:-|
 |[557. 反转字符串中的单词 III](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/)|考察了有关于reverse和vector的迭代器的使用|
 |:star:[415. 字符串相加](https://leetcode-cn.com/problems/add-strings/)|模板题|
+|:star:[459. 重复的子字符串](https://leetcode-cn.com/problems/repeated-substring-pattern/)|巧妙方法：将字符串加倍，然后从第一个位置寻找原字符串，这个方法太巧妙。常规方法：利用KMP里的思想，没做|
+|:fire:[468. 验证IP地址](https://leetcode-cn.com/problems/validate-ip-address/)|这道题有**split()函数的模板写法**。本题需要考虑很多细节，想去判断一个字符串合不合法，**可以去想什么时候该字符串不合法**，反向思考简化判断过程|
 |[5603. 确定两个字符串是否接近](https://leetcode-cn.com/problems/determine-if-two-strings-are-close/)|给出两个操作，判断能不能将字符串转化为另一个字符串。**考察字符串转换条件**|
 
 
@@ -279,15 +301,18 @@
 |[352. 将数据流变为多个不相交区间](https://leetcode-cn.com/problems/data-stream-as-disjoint-intervals/)|**两个order_map存储区间**，左端点->右端点，右端点->左端点，当插入一个点进去的时候要去判断是否和左右两个区间相交，如果相交，合并区间后要删除之前的映射关系|
 |[383. 赎金信](https://leetcode-cn.com/problems/ransom-note/)|遇到英文字母和其出现个数的映射时，可以直接用vector来存储映射关系|
 |[429. N叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)|记录每一层的数量统一遍历|
+|:fire::star:[454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)|相当于从四个等长数组中每个选一个数，判断四数之和是否为0。**利用map存放前两个数组每个数相加的和(key)，val为和出现的次数，然后再去计算第三个第四个数组中所有数字的和，看其相反数有没有出现在map中**，这个题和18题的区别在于，这道题**不用去重**，所以可以使用hash|
 
 
 ## 链表
 |题目|知识点|
 :-|:-|
+|:fire:[2. 两数相加](https://leetcode-cn.com/problems/add-two-numbers/)|模拟竖式加法，要设置一个**进位**，要注意最后可能需要添加一个值为1的节点|
 |[83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)|递归写法非常巧妙|
 |[82. 删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)|有迭代和递归两种写法，都比较巧妙，和上一个题思想类似|
 |[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)|一头一尾取元素相连，由于想取得尾元素每次都需要遍历链表，所以这里可以优化。**递归方法相当巧妙**|
 |[203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)|**递归解法相当巧妙**|
+|:fire:[206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)|迭代法：设置pre,cur,next；递归：边界条件，调用递归函数的位置|
 |[430. 扁平化多级双向链表](https://leetcode-cn.com/problems/flatten-a-multilevel-doubly-linked-list/)|考察链表的递归|
 
 
@@ -302,19 +327,23 @@
 |[332. 重新安排行程](https://leetcode-cn.com/problems/reconstruct-itinerary/)|考察**欧拉路径**的生成算法|
 
 ## 单调栈
+
+> 1.涉及到按照字典序选择元素
+
 |题目|知识点|
 :-|:-|
 |[316. 去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)|利用了和402一样的思想，由于**去掉重复字母后要保证整个字符串相对顺序不被改变而且字典序最小**，那么这个时候就要考虑单调栈了|
 |[321. 拼接最大数](https://leetcode-cn.com/problems/create-maximum-number/)|这个题是从两个vector中选出K个数字，要求组成的数字最大。**分治+单调队列**,这道题需要考虑的细节比较多，有难度。按字典序比较两个序列大小的函数`bool lexicographical_compare(it1_begin(), it1_end(), it2.begin(), it2.end())`|
-|[402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)|在一个字符串表示的数中移除K位，使得数字最小。一开始我用的回溯，但是超时了，原因在于我没有利用题中的有关信息，因为想让某个数字最小，只要让这个数字的最高位尽可能小就可以了。所以使用了**单调栈**进行优化，如果后一个数字大于前一个数字，那么就将前一个数字出栈|
+|:star:[402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)|**根据字典序或数字大小进行选择或删除---->单调栈**。在一个字符串表示的数中移除K位，使得数字最小。一开始我用的回溯，但是超时了，原因在于我没有利用题中的有关信息，因为想让某个数字最小，只要让这个数字的最高位尽可能小就可以了。所以使用了**单调栈**进行优化，如果后一个数字大于前一个数字，那么就将前一个数字出栈|
 |[496. 下一个更大元素 I](https://leetcode-cn.com/problems/next-greater-element-i/)|核心就是找出在位置`i`后第一个比`nums[i]`大的数字，维护一个单调递减队列|
 |[503. 下一个更大元素 II](https://leetcode-cn.com/problems/next-greater-element-ii/)|关键在于处理**循环数组**，可以在原数组后再补一个原数组，但不用真的去补，只需要用取余操作模拟|
-|[556. 下一个更大元素 III](https://leetcode-cn.com/problems/next-greater-element-iii/)|将某个字符串表示的数字变成刚好比这个字符串大的数字，单调队列可以稍微优化搜索过程|
+|[556. 下一个更大元素 III](https://leetcode-cn.com/problems/next-greater-element-iii/)|将某个字符串表示的数字变成刚好比这个字符 串大的数字，单调队列可以稍微优化搜索过程|
 |[739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)|求第一个比当前位置数大的数的下标|
+|[5614. 找出最具竞争力的子序列]|和402的思想一摸一样，但是我周赛没想到，一直在往回溯的方向去想|
 ## 单调队列
 |题目|知识点|
 :-|:-|
-|||
+|:fire::star:[239. 滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)|利用双端队列，队头保持最值。要注意的点主要在于出队的时候，先把当前元素`nums[i]`入队，然后再利用`i - k(窗口大小) + 1`得到本来待出队元素的下标（因为队列里保存的是经过处理过的单调数据，要出队的那个数可能已经出队了）,如果这个数和队头元素相等，那么就出队队头元素。**这种方法也能求窗口里的最小值**|
 
 ## 栈
 |题目|知识点|
@@ -323,21 +352,43 @@
 |[227. 基本计算器 II](https://leetcode-cn.com/problems/basic-calculator-ii/)|整体思路和上一个题一样，主要注意**运算符的优先级导致的计算顺序问题**|
 
 ## 堆
+
+> 堆：堆的底层实现是一颗完全二叉树（除最后一层外，其余每一层都有左右子节点，最后一层从左到右依次排列）
+> 如何手写一个堆？
+> 1.插入一个数：`heap[++size] = x; up(size)`
+> 2.求集合中的最小数：`heap[1];`
+> 3.删除最小值：`heap[1] = heap[size]; size--; down(1);`
+> 4.删除任意一个元素：`heap[k] = heap[size]; size--; down(k); up(k);`
+> 5.修改任意一个元素：`heap[k] = x;down(k); up(k);`
+
 |题目|知识点|
 :-|:-|
 |[373. 查找和最小的K对数字](https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/)|这道题主要难点在于怎么写priority_queue的cmp函数，**大堆小于号，小堆大于号**|
 
 ## 并查集
+
+> 1.合并两个集合
+> 2.判断两个元素是不是在一个集合中
+> 3.返回集合的大小
+>  基本原理：每个集合用一棵树来表示。树根的标号就是整个集合的编号，每个节点都存储他的父节点,p[x]表示x的父节点
+> 问题一：如何判断树根？if(p[x] == x)
+> 问题二：如何求x的集合编号？while(p[x] != x) x = p[x]
+> 问题三：如何合并两个集合：px是编号x的集合，py是编号y的集合。p[x] = y
+
 |题目|知识点|
 :-|:-|
 |||
 
-## 前缀树
+## Trie树
+> 1.统计字符串出现的次数
+> 2.查找某个字符串的前缀
+
 |题目|知识点|
 :-|:-|
 |[208. 实现 Trie (前缀树)](https://leetcode-cn.com/problems/implement-trie-prefix-tree/)|前缀树适用于两个场景：①统计每个单词出现的次数。②查找某个单词的前缀|
 |[212. 单词搜索 II](https://leetcode-cn.com/problems/word-search-ii/)|题目要求在一个矩阵中搜索多个单词是否存在于矩阵中。基本方法是遍历所有待搜索单词，然后一个个单词去在矩阵中用DFS去搜索。进阶方法是：**把所有待搜索单词放到一个前缀树中，用word来代替flag标识单词的结束，然后在前缀树的基础上使用回溯算法去搜索单词**|
 |[336. 回文对](https://leetcode-cn.com/problems/palindrome-pairs/)|前缀树可以做，但我没做|
+|[421. 数组中两个数的最大异或值](https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/)|**1.每次得到一个数的最高位2.使用异或实现0和1的相互转换3.通过每一位来构造一个数**。Trie的孩子结点中存放0或1，深度是32.这样每个32位数就都能放Trie里面存储了。**所谓两个数异或值最大，就是希望另一个数尽可能和自己每一位都不相同**|
 
 ## 线段树
 |题目|知识点|
