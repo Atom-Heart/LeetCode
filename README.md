@@ -78,13 +78,18 @@
 |[47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)|每个数字只能用一次，但是有重复数字。需要考虑**去重**。剪枝的条件是`if(i - 1 >= 0 && nums[i] == nums[i - 1] && used[i - 1] == false)`|
 
 
-### 第3部分：剪枝
+### 第5部分：剪枝
 |题目|知识点|
 :-|:-|
 |[93. 复原IP地址](https://leetcode-cn.com/problems/restore-ip-addresses/)|这个题整体思路比较好想，但代码复杂，有许多剪枝的地方需要去判断|
 |[39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)|**无重复数字，但每个数字可以重复使用**。需要通过剪枝去除不必要的计算，**通过排序数组，传入回溯的起始位置来去重**|
 |[40. 组合总和 II](https://leetcode-cn.com/problems/combination-sum-ii/)|**有重复数字，但每个数字只能用一次**,利用了set去重|
 |[216. 组合总和 III](https://leetcode-cn.com/problems/combination-sum-iii/)|大同小异|
+### 第6部分：其他
+|题目|知识点|
+:-|:-|
+|[51. N 皇后](https://leetcode-cn.com/problems/n-queens/)|精髓在于如何判断当前棋盘有效：先行后列依次放queen，**只需判断当前放置的queen左上和右上斜线和当前列是否存在queen就可以了**|
+
 
 
 ## 贪心
@@ -117,18 +122,23 @@
 |:star:[34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)|**在含有重复元素的数组中搜索上下标**，二分搜索的小变种，相当于做了两次搜索，第一次搜索左边界，当`nums[mid] == target`时不能直接返回，必须要确保`mid`左边没有`target`才可以；第二次搜索右边界，返回的原则同上|
 |[162. 寻找峰值](https://leetcode-cn.com/problems/find-peak-element/)|二分的思想就是：**根据某种情况，直接能去掉一半元素**。这道题只是要求我们返回任意一个顶峰，所以我们只需要确定任意一半至少含有一个顶峰就行了，另外一半可以舍弃，我们只需要将`nums[mid]`和`nums[mid+1]`作比较就可以了。**这道题不是有序数组但是却可以用二分法去做**|
 |:star:[378. 有序矩阵中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)|**值域搜索**,可行解在一个区间内查找，判断这个解是否成立|
+|[532. 数组中的 k-diff 数对](https://leetcode-cn.com/problems/k-diff-pairs-in-an-array/)|**sort+set去重+二分**|
+|[540. 有序数组中的单一元素](https://leetcode-cn.com/problems/single-element-in-a-sorted-array/)|用位运算很好做，用二分比较难想，而且细节很多|
 
 
 ## 双指针
 |题目|知识点|
 :-|:-|
 |:fire::star:[18. 四数之和](https://leetcode-cn.com/problems/4sum/)|**四指针+去重**，用两个for循环表示前两个指针，在进行双指针查找，这道题的去重手法很重要，重点看|
-|[26. 删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)|一个指针指向能插入的位置，另一个指针指向待插入的元素。判断一个数是不是能被插入的方法是：判断这个数是不是和前一个数相等|
+|:star:[26. 删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)|一个指针指向能插入的位置，另一个指针指向待插入的元素。判断一个数是不是能被插入的方法是：判断这个数是不是和前一个数相等|
 |:star:[56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)|如果区间重复，则将区间合并为一个区间。**经典字符串题目**|
 |[80. 删除排序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/)|这个题和前一道题的区别在于，这道题可以允许有一个数字出现两次。这两道题不难，但写出简洁的代码是有难度的|
 |:star:[392. 判断子序列](https://leetcode-cn.com/problems/is-subsequence/)|**字串匹配问题，思想不要被限制，我一直在想用hash做。如果有大量待匹配字串，该如何提速呢？**|
 
 ## 滑动窗口
+
+> 1.找到一个连续范围，使其满足某个条件
+
 |题目|知识点|
 :-|:-|
 |:star:[3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)|经典滑动窗口题目|
@@ -145,10 +155,15 @@
 |[386. 字典序排数](https://leetcode-cn.com/problems/lexicographical-numbers/)|先序DFS，以1-9为根节点，DFS中每次能选择0-9，相当于十叉树的先序遍历|
 |:star:[417. 太平洋大西洋水流问题](https://leetcode-cn.com/problems/pacific-atlantic-water-flow/)|**反向DFS**，从目标点向起点反向搜索 |
 ## BFS
+
+> 1.多源BFS求最短或最长路径：求最短路径，只要找到目标值就返回。最长路径：所有目标值都看完以后再返回。
+
 |题目|知识点|
 :-|:-|
 |:star:[**127. 单词接龙**](https://leetcode-cn.com/problems/word-ladder/)|考察了单向BFS(超时)和**双向BFS**|
-|||
+|:fir::star:[542. 01 矩阵](https://leetcode-cn.com/problems/01-matrix/)|**最短路径+多源BFS+反向思考**|
+|:fir::star:[1162. 地图分析](https://leetcode-cn.com/problems/as-far-from-land-as-possible/)|方法一：和542一样，每个结点都记录扩散到次数需要的距离。方法二：**层次BFS计算步数**，看看一共需要扩散多少步能扩散整个矩阵|
+|[剑指 Offer 13. 机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)|常规BFS|
 
 ## 数学
 |题目|知识点|
@@ -178,10 +193,14 @@
 |:star:[842. 将数组拆分成斐波那契序列](https://leetcode-cn.com/problems/split-array-into-fibonacci-sequence/)|**为预防当字符串转整型出现溢出，可以在操作前判断是否溢出**|
 
 ## 排序
+
+> 1.出现字典序之类的要求
+
 |题目|知识点|讲解|
 :-|:-|:-|
 |[324. 摆动排序 II](https://leetcode-cn.com/problems/wiggle-sort-ii/)|要求把数字排列成`nums[i]<nums[i+1]>nums[i+2]<...`。可以考虑把串数字先排序，然后再一分为二，然后交替插入新的数组中，陷阱在于如果前后两个数组出现了相同的数字，会导致最终结果出现多个相同数字相邻的情况|
 |[327. 区间和的个数](https://leetcode-cn.com/problems/count-of-range-sum/)|方法一：使用的multise容器和它的方法lower_bound、upper_bound、distance。**通过multiset无序转有序，在multiset中使用二分搜索**。方法二：**利用归并排序思想**，没做。这题很难|
+|[524. 通过删除字母匹配到字典里最长单词](https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/)|**先将字符串按长度和字典序排序**，然后利用双指针去匹配。这道题一开始往滑动窗口和Hash上去想了，没有想到先要排序，失败！|
 
 ## 前缀和
 |题目|知识点|讲解|
@@ -190,13 +209,13 @@
 |:star:[304. 二维区域和检索 - 矩阵不可变](https://leetcode-cn.com/problems/range-sum-query-2d-immutable/)||
 |:star:[523. 连续的子数组和](https://leetcode-cn.com/problems/continuous-subarray-sum/)|**前缀和 + Hash(值和下标的映射) + 数学**，`(preSum[i] - preSum[j]) % k == 0`相当于`preSum[i] % k == preSum[j] % k`|
 |:star:[1314. 矩阵区域和](https://leetcode-cn.com/problems/matrix-block-sum/)||
-
 |:star:[1664. 生成平衡数组的方案数](https://leetcode-cn.com/problems/ways-to-make-a-fair-array/)|创建**奇数项的前缀和**和**偶数项的前缀和**，主要难点在奇偶前缀和数组所代表的意义，先来考虑一下普通的前缀数组所代表的意义：`nums[i],0<=i<=n - 1`，`preSum[i],0<=i<=n`，`preSum[i]`有两种解释的方法：1.原数组第i项之前的前缀和（i = 0, 1, ...., n）2.用原数组的下标访问前缀和数组，原数组前i项（不包括`nums[i]`）的前缀和。   `oddPreSum[i],0 <= i <= n`表示原数组中前i项（不包括`nums[i]`）中奇数的前缀和|
 
 ## 设计
 |题目|知识点|讲解|
 :-|:-|:-|
 |[380. 常数时间插入、删除和获取随机元素](https://leetcode-cn.com/problems/insert-delete-getrandom-o1/)|利用**Hash(建立数据与下标的映射)+数组(保存数据，通过交换实现删除)** ，实现插入和删除的O(1)时间复杂度|
+|:star:[622. 设计循环队列](https://leetcode-cn.com/problems/design-circular-queue/)|**1.如果判空和判满？--> buffer大小设置为`k+1`，`head==tail`为空，`（tail+1)%n==head`为满。2.如何获取队尾元素? --> tail指向的是下次可插入位置，所以要取前一个位置，要循环取:`buffer[(tail - 1 + n) % n]`**。|
 
 ## 蓄水池抽样算法
 
@@ -241,6 +260,8 @@
 |[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)|和**442**使用了相同的思想|
 |[463. 岛屿的周长](https://leetcode-cn.com/problems/island-perimeter/)|常规方法是DFS。但是可以利用**岛屿数量和相邻的边数计算周长**|
 |:fire::star:[498. 对角线遍历](https://leetcode-cn.com/problems/diagonal-traverse/)|技巧性极度强|
+|:star:[566. 重塑矩阵](https://leetcode-cn.com/problems/reshape-the-matrix/)|**将一维矩阵转换成任意m * n的矩阵：`matrix[i / col][i % col] = nums[i]`**|
+|:star:[605. 种花问题](https://leetcode-cn.com/problems/can-place-flowers/)|**防御性编程思想：向首尾添加标记处理边界问题**|
 
 ## 位操作
 
@@ -264,6 +285,7 @@
 
 |题目|知识点|
 :-|:-|
+|:star:[94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)|**颜色标记法**|
 |[**95. 不同的二叉搜索树 II**](https://leetcode-cn.com/problems/unique-binary-search-trees-ii/)|这道题用了递归的思想，非常非常巧妙，重点看。还可以动态规划的思想做，但我没看|
 |[105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)|前序遍历的第一个节点一定是二叉树的根节点，然后在中序遍历中寻找根节点的位置，可以把二叉树分为左右两个子树，并且还可以知道左右子树所含节点的个数。然后再对左右子树进行相同的操作。这就是分治的思想|
 |[106. 从中序与后序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)|后序遍历中最后一个节点一定是二叉树的根节点，然后在中序遍历中寻找根节点的位置，可以把二叉树分为左右两个子树。整体思想和上题一样|
@@ -272,12 +294,16 @@
 |[111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)|分治|
 |[**116. 填充每个节点的下一个右侧节点指针**](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/)|这个题可以转化成如何成对访问完美二叉树的两两相邻节点。空间复杂度为O(1)的迭代和递归做法都非常巧妙 |
 |[**117. 填充每个节点的下一个右侧节点指针 II**](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/)|这题非常有意思|
+|:star:[144. 二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)|**颜色标记法，入栈顺序和访问顺序相反**|
+|:star:[145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/)|**颜色标记法**|
 |[235. 二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)|这个题要利用二叉排序树本身的性质，如果当前节点的大小位于两个目标节点之间，那么这个节点就是最近的公共节点，如果两个节点都比当前节点大，那么LCA一定在当前节点的右子树；如果两个节点都比当前节点小，那么LCA一定在当前节点的左子树|
 |[257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)|分治和DFS都可以做|
 |:star:[297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)|将一颗二叉树序列化，有前序和中序两种序列可以选择，然后又可以通过序列化的结果重构这颗二叉树。**前序序列化充分利用了分治的思想**，十分巧妙|
 |[331. 验证二叉树的前序序列化](https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/)|方法一：利用了297的思想，看该序列能否重构一个二叉树|
 |:fire::star:[450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)|分三种情况：1.待删除结点是叶子结点，直接将该结点赋值为`nullptr`。2.待删除结点只有左子树或右子树，将左儿子或右儿子赋值给待删除结点。3.如果既有左子树又有右子树，那就找待删除结点的后继结点，然后将后继结点的值赋给待删除结点，然后递归删除后继结点的值|
 |[501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/)|**可以想象为在有序数组里面找众数**，利用BST的性质，中序遍历的结果是递增序列，设置**前驱结点**|
+|[563. 二叉树的坡度](https://leetcode-cn.com/problems/binary-tree-tilt/)|我写的代码很冗余，参考代码写的很漂亮|
+|:fire::star:[572. 另一个树的子树](https://leetcode-cn.com/problems/subtree-of-another-tree/)|1.要么两个树相等，要么这个树是左数的子树3.要么这个树是右树的子树|
 
 
 ## 字符串
