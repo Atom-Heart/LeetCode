@@ -26,6 +26,7 @@
 |[357. 计算各个位数不同的数字个数](https://leetcode-cn.com/problems/count-numbers-with-unique-digits/)|方法一：**分治回溯**，主要在于一个细节：当数字的位数大于2时，首位不能为0。方法二：数字的排列组合|
 |[368. 最大整除子集](https://leetcode-cn.com/problems/largest-divisible-subset/)|有点类似于300.最长上升子序列。这道题的关键在于**需要返回的是路径而不是状态**|
 |[413. 等差数列划分](https://leetcode-cn.com/problems/arithmetic-slices/)|基本题目，考察如何选取状态和初始值。数学做法很巧妙，利用了**差分数组**|
+|[650. 只有两个键的键盘](https://leetcode-cn.com/problems/2-keys-keyboard/)|很难，不会|
 
 
 
@@ -49,6 +50,25 @@
 |[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)|只能交易K次|
 |[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)||
 |[714. 买卖股票的最佳时机含手续费](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)||
+### 7.打家劫舍问题
+|题目|知识点|
+:-|:-|
+|||
+### 8.最长子序列问题
+
+> 子串与子序列区别：子串不可跳跃，子序列可以跳跃，如 “AC”是“ABCDEFG”的子序列，而不是子串。 而“ABC”则是其子串
+
+|题目|知识点|
+:-|:-|
+|[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)||
+|[300. 最长上升子序列](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/solution/)||
+|[516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)||
+|[659. 分割数组为连续子序列](https://leetcode-cn.com/problems/split-array-into-consecutive-subsequences/)|**贪心**，以`nums[i]`结尾的子序列作为状态考虑问题。方法一：**哈希+堆**。方法二：**双哈希**|
+|[673. 最长递增子序列的个数](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/)||
+|[674. 最长连续递增序列](https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/)||
+|[1143. 最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/)||
+|[1312. 让字符串成为回文串的最少插入次数](https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/submissions/)||
+
 ***
 
 ## 回溯
@@ -134,6 +154,7 @@
 |:star:[56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)|如果区间重复，则将区间合并为一个区间。**经典字符串题目**|
 |[80. 删除排序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/)|这个题和前一道题的区别在于，这道题可以允许有一个数字出现两次。这两道题不难，但写出简洁的代码是有难度的|
 |:star:[392. 判断子序列](https://leetcode-cn.com/problems/is-subsequence/)|**字串匹配问题，思想不要被限制，我一直在想用hash做。如果有大量待匹配字串，该如何提速呢？**|
+|:star:[658. 找到 K 个最接近的元素](https://leetcode-cn.com/problems/find-k-closest-elements/)|**反向思考！！**。保留K个元素，就相当于删除n - k个元素。我一开始的想法是从最接近x的数向外搜索，其实可以转化为从两边删除逼近x|
 
 ## 滑动窗口
 
@@ -161,8 +182,8 @@
 |题目|知识点|
 :-|:-|
 |:star:[**127. 单词接龙**](https://leetcode-cn.com/problems/word-ladder/)|考察了单向BFS(超时)和**双向BFS**|
-|:fir::star:[542. 01 矩阵](https://leetcode-cn.com/problems/01-matrix/)|**最短路径+多源BFS+反向思考**|
-|:fir::star:[1162. 地图分析](https://leetcode-cn.com/problems/as-far-from-land-as-possible/)|方法一：和542一样，每个结点都记录扩散到次数需要的距离。方法二：**层次BFS计算步数**，看看一共需要扩散多少步能扩散整个矩阵|
+|:fire::star:[542. 01 矩阵](https://leetcode-cn.com/problems/01-matrix/)|**最短路径+多源BFS+反向思考**|
+|:fire::star:[1162. 地图分析](https://leetcode-cn.com/problems/as-far-from-land-as-possible/)|方法一：和542一样，每个结点都记录扩散到次数需要的距离。方法二：**层次BFS计算步数**，看看一共需要扩散多少步能扩散整个矩阵|
 |[剑指 Offer 13. 机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)|常规BFS|
 
 ## 数学
@@ -216,6 +237,7 @@
 :-|:-|:-|
 |[380. 常数时间插入、删除和获取随机元素](https://leetcode-cn.com/problems/insert-delete-getrandom-o1/)|利用**Hash(建立数据与下标的映射)+数组(保存数据，通过交换实现删除)** ，实现插入和删除的O(1)时间复杂度|
 |:star:[622. 设计循环队列](https://leetcode-cn.com/problems/design-circular-queue/)|**1.如果判空和判满？--> buffer大小设置为`k+1`，`head==tail`为空，`（tail+1)%n==head`为满。2.如何获取队尾元素? --> tail指向的是下次可插入位置，所以要取前一个位置，要循环取:`buffer[(tail - 1 + n) % n]`**。|
+|[641. 设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque/)|和622差不多|
 
 ## 蓄水池抽样算法
 
@@ -262,6 +284,7 @@
 |:fire::star:[498. 对角线遍历](https://leetcode-cn.com/problems/diagonal-traverse/)|技巧性极度强|
 |:star:[566. 重塑矩阵](https://leetcode-cn.com/problems/reshape-the-matrix/)|**将一维矩阵转换成任意m * n的矩阵：`matrix[i / col][i % col] = nums[i]`**|
 |:star:[605. 种花问题](https://leetcode-cn.com/problems/can-place-flowers/)|**防御性编程思想：向首尾添加标记处理边界问题**|
+|[665. 非递减数列](https://leetcode-cn.com/problems/non-decreasing-array/solution/)|以左中右三个数字为单位去考虑问题，这题很恶心，判断条件不好想|
 
 ## 位操作
 
@@ -396,6 +419,7 @@
 > 1.合并两个集合
 > 2.判断两个元素是不是在一个集合中
 > 3.返回集合的大小
+> 4.判断二叉树中是否有环
 >  基本原理：每个集合用一棵树来表示。树根的标号就是整个集合的编号，每个节点都存储他的父节点,p[x]表示x的父节点
 > 问题一：如何判断树根？if(p[x] == x)
 > 问题二：如何求x的集合编号？while(p[x] != x) x = p[x]
@@ -403,7 +427,8 @@
 
 |题目|知识点|
 :-|:-|
-|||
+|[684. 冗余连接](https://leetcode-cn.com/problems/redundant-connection/)|判断**无向图中是否存在环**，如果两个集合的代表元素相同，则说明有环|
+|[685. 冗余连接 II](https://leetcode-cn.com/problems/redundant-connection-ii/)|判断**有向图中是否有环,但拓扑排序不适合用于解决这个问题**，因为题目中的要求是返回一条需要删除的边。这道题可以转化为684，因为题中说“附加的边的两个顶点包含在1到N中间，这条附加的边不属于树中已存在的边”，所以每个结点的入度要不就是全是1，要么有一个节点的入度为2，其他的都是1。|
 
 ## Trie树
 > 1.统计字符串出现的次数
