@@ -2,12 +2,22 @@
 
 ## 动态规划
 ***
-### 背包问题
-### 1.01背包DP
+### 1.背包DP
+### 1.1 01背包
 题目|知识点|
 :-|:-|
+|[474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)|选择求和问题，可以转化成01背包，考察01背包滚动数组优化，**从大到小遍历**|
 |[494. 目标和](https://leetcode-cn.com/problems/target-sum/)|回溯超时，可以转化为子集背包问题
-|[474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)|选择求和问题，可以转化成01背包|
+### 1.2 完全背包
+题目|知识点|
+:-|:-|
+### 1.3 多重背包
+题目|知识点|
+:-|:-|
+### 1.4 分组背包
+题目|知识点|
+:-|:-|
+
 
 ### 2.博奕型DP
 |题目|知识点|
@@ -18,6 +28,7 @@
 |题目|知识点|
 :-|:-|
 |[62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)|经典DP问题，dp[i][j] = dp[i - 1][j] + dp[i][j - 1]|
+|[72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)|`dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1])`|
 |[97.交错字符串](https://leetcode-cn.com/problems/interleaving-string/)|可以借鉴62.不同路径的思路|
 |[132. 分割回文串 II](https://leetcode-cn.com/problems/palindrome-partitioning-ii/)|dp[i] = min(dp[i], dp[j] + 1 for j in range(i) if s[j + 1, i]是回文);dp[i]表示字符串s[0 ~ i]分割成回文字串的个数|
 |[135. 分发糖果](https://leetcode-cn.com/problems/candy/)|一知半解|
@@ -26,16 +37,17 @@
 |[357. 计算各个位数不同的数字个数](https://leetcode-cn.com/problems/count-numbers-with-unique-digits/)|方法一：**分治回溯**，主要在于一个细节：当数字的位数大于2时，首位不能为0。方法二：数字的排列组合|
 |[368. 最大整除子集](https://leetcode-cn.com/problems/largest-divisible-subset/)|有点类似于300.最长上升子序列。这道题的关键在于**需要返回的是路径而不是状态**|
 |[413. 等差数列划分](https://leetcode-cn.com/problems/arithmetic-slices/)|基本题目，考察如何选取状态和初始值。数学做法很巧妙，利用了**差分数组**|
+|:fire::star:[516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)|两个元素相等：`if(s[i] == s[j]) dp[i][j] = dp[i + 1][j - 1] + 2;`。**两个元素不相等：**`dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])`。**要注意填表顺序**|
 |[650. 只有两个键的键盘](https://leetcode-cn.com/problems/2-keys-keyboard/)|很难，不会|
+|[5631. 跳跃游戏 VI](https://leetcode-cn.com/problems/jump-game-vi/)|**单调队列优化**|
+
 
 
 
 ### 4.区间DP
 |题目|知识点|
 :-|:-|
-|:star:[375. 猜数字大小 II](https://leetcode-cn.com/problems/guess-number-higher-or-lower-ii/)|**博弈思想+区间DP+最坏情况最优解**，状态表示：一.集合：i~j猜数字，最坏情况得到的最低成本。2.属性：最小值。二、状态计算：`dp[i][j] = min(dp[i][j], max(dp[i][k - 1], dp[k + 1][j]) + k)`|
-|:fire::star:[516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)|两个元素相等：`if(s[i] == s[j]) dp[i][j] = dp[i + 1][j - 1] + 2;`。**两个元素不相等：**`dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])`。**要注意填表顺序**|
-
+|:two::star:[375. 猜数字大小 II](https://leetcode-cn.com/problems/guess-number-higher-or-lower-ii/)|**博弈思想+区间DP+极小化极大**，状态表示：一.集合：i~j猜数字，最坏情况得到的最低成本。2.属性：最小值。二、状态计算：`dp[i][j] = min(dp[i][j], max(dp[i][k - 1], dp[k + 1][j]) + k)`|
 ### 5.树型DP
 |题目|知识点|
 :-|:-|
@@ -53,7 +65,9 @@
 ### 7.打家劫舍问题
 |题目|知识点|
 :-|:-|
-|||
+|[198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)||
+|[213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/)||
+|[337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/)||
 ### 8.最长子序列问题
 
 > 子串与子序列区别：子串不可跳跃，子序列可以跳跃，如 “AC”是“ABCDEFG”的子序列，而不是子串。 而“ABC”则是其子串
@@ -66,7 +80,8 @@
 |[659. 分割数组为连续子序列](https://leetcode-cn.com/problems/split-array-into-consecutive-subsequences/)|**贪心**，以`nums[i]`结尾的子序列作为状态考虑问题。方法一：**哈希+堆**。方法二：**双哈希**|
 |[673. 最长递增子序列的个数](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/)||
 |[674. 最长连续递增序列](https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/)||
-|[1143. 最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/)||
+|[718. 最长重复子数组](https://leetcode-cn.com/problems/maximum-length-of-repeated-subarray/)|以`str[i]`结尾的字串作为状态。`if(A[i] == B[j]) dp[i][j] == dp[i - 1][j - 1] + 1`|
+|[1143. 最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/)|`dp[i][j]`表示所有在第一个序列的前`i`个字母中出现，且在第二个序列前`j`个字母中出现的子序列。在计算状态的时候，可以按照选不选第`i`个或第`j`个字母为标准将状态划分为(0代表选，1代表不选)00，01，10，11。这道题的难度在于理解**状态的包含关系**：00一定是01和10的子集，所以不用单独判断；01的状态并不是`dp[i - 1][j]`，因为`dp[i - 1][j]`并不一定以`str2[j]`结尾，但是01是`dp[i - 1][j]`的子集，**这种求最值的情况可以通过求大的集合得出小集合的最值**|
 |[1312. 让字符串成为回文串的最少插入次数](https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/submissions/)||
 
 ***
@@ -183,6 +198,7 @@
 :-|:-|
 |:star:[**127. 单词接龙**](https://leetcode-cn.com/problems/word-ladder/)|考察了单向BFS(超时)和**双向BFS**|
 |:fire::star:[542. 01 矩阵](https://leetcode-cn.com/problems/01-matrix/)|**最短路径+多源BFS+反向思考**|
+|[695. 岛屿的最大面积](https://leetcode-cn.com/problems/max-area-of-island/)|经典BFS|
 |:fire::star:[1162. 地图分析](https://leetcode-cn.com/problems/as-far-from-land-as-possible/)|方法一：和542一样，每个结点都记录扩散到次数需要的距离。方法二：**层次BFS计算步数**，看看一共需要扩散多少步能扩散整个矩阵|
 |[剑指 Offer 13. 机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)|常规BFS|
 
@@ -238,6 +254,7 @@
 |[380. 常数时间插入、删除和获取随机元素](https://leetcode-cn.com/problems/insert-delete-getrandom-o1/)|利用**Hash(建立数据与下标的映射)+数组(保存数据，通过交换实现删除)** ，实现插入和删除的O(1)时间复杂度|
 |:star:[622. 设计循环队列](https://leetcode-cn.com/problems/design-circular-queue/)|**1.如果判空和判满？--> buffer大小设置为`k+1`，`head==tail`为空，`（tail+1)%n==head`为满。2.如何获取队尾元素? --> tail指向的是下次可插入位置，所以要取前一个位置，要循环取:`buffer[(tail - 1 + n) % n]`**。|
 |[641. 设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque/)|和622差不多|
+|[707. 设计链表](https://leetcode-cn.com/problems/design-linked-list/)|一定要注意`tail`结点的移动，不要粗心大意|
 
 ## 蓄水池抽样算法
 
@@ -317,6 +334,7 @@
 |[111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)|分治|
 |[**116. 填充每个节点的下一个右侧节点指针**](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/)|这个题可以转化成如何成对访问完美二叉树的两两相邻节点。空间复杂度为O(1)的迭代和递归做法都非常巧妙 |
 |[**117. 填充每个节点的下一个右侧节点指针 II**](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/)|这题非常有意思|
+|:star:[124. 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)|**利用全局变量特判保证不改变递归函数的整体功能**，和**687题类似**|
 |:star:[144. 二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)|**颜色标记法，入栈顺序和访问顺序相反**|
 |:star:[145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/)|**颜色标记法**|
 |[235. 二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)|这个题要利用二叉排序树本身的性质，如果当前节点的大小位于两个目标节点之间，那么这个节点就是最近的公共节点，如果两个节点都比当前节点大，那么LCA一定在当前节点的右子树；如果两个节点都比当前节点小，那么LCA一定在当前节点的左子树|
@@ -327,6 +345,8 @@
 |[501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/)|**可以想象为在有序数组里面找众数**，利用BST的性质，中序遍历的结果是递增序列，设置**前驱结点**|
 |[563. 二叉树的坡度](https://leetcode-cn.com/problems/binary-tree-tilt/)|我写的代码很冗余，参考代码写的很漂亮|
 |:fire::star:[572. 另一个树的子树](https://leetcode-cn.com/problems/subtree-of-another-tree/)|1.要么两个树相等，要么这个树是左数的子树3.要么这个树是右树的子树|
+|:star:[687. 最长同值路径](https://leetcode-cn.com/problems/longest-univalue-path/)|**利用全局遍历去处理递归中的特殊情况**。与**124题**有着一样的思想。这道题对于递归分治的思想考察的很到位|
+|[701. 二叉搜索树中的插入操作](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)|经典题目，只要插到正确的位置就行了，不要去考虑平衡问题|
 
 
 ## 字符串
@@ -337,6 +357,7 @@
 |:star:[415. 字符串相加](https://leetcode-cn.com/problems/add-strings/)|模板题|
 |:star:[459. 重复的子字符串](https://leetcode-cn.com/problems/repeated-substring-pattern/)|巧妙方法：将字符串加倍，然后从第一个位置寻找原字符串，这个方法太巧妙。常规方法：利用KMP里的思想，没做|
 |:fire:[468. 验证IP地址](https://leetcode-cn.com/problems/validate-ip-address/)|这道题有**split()函数的模板写法**。本题需要考虑很多细节，想去判断一个字符串合不合法，**可以去想什么时候该字符串不合法**，反向思考简化判断过程|
+|[696. 计数二进制子串](https://leetcode-cn.com/problems/count-binary-substrings/)|很巧妙，要从字符串自身结构入手优化|
 |[5603. 确定两个字符串是否接近](https://leetcode-cn.com/problems/determine-if-two-strings-are-close/)|给出两个操作，判断能不能将字符串转化为另一个字符串。**考察字符串转换条件**|
 
 
@@ -390,9 +411,13 @@
 |[739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)|求第一个比当前位置数大的数的下标|
 |[5614. 找出最具竞争力的子序列]|和402的思想一摸一样，但是我周赛没想到，一直在往回溯的方向去想|
 ## 单调队列
+
+> 使用deque，保存的是元素的下标
+
 |题目|知识点|
 :-|:-|
 |:fire::star:[239. 滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)|利用双端队列，队头保持最值。要注意的点主要在于出队的时候，先把当前元素`nums[i]`入队，然后再利用`i - k(窗口大小) + 1`得到本来待出队元素的下标（因为队列里保存的是经过处理过的单调数据，要出队的那个数可能已经出队了）,如果这个数和队头元素相等，那么就出队队头元素。**这种方法也能求窗口里的最小值**|
+|[5631. 跳跃游戏 VI](https://leetcode-cn.com/problems/jump-game-vi/)|**单调队列优化**|
 
 ## 栈
 |题目|知识点|
@@ -413,6 +438,7 @@
 |题目|知识点|
 :-|:-|
 |[373. 查找和最小的K对数字](https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/)|这道题主要难点在于怎么写priority_queue的cmp函数，**大堆小于号，小堆大于号**|
+|:star:[692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/)|这道题有助于理解优先队列的排序函数的本质。排序函数是比较两个参数的**优先级**，**如果返回值是true,表明第一个参数优先级大**，反之第二个参数优先级大。在优先队列中，**优先级大的元素在堆底部，优先级小的元素在堆顶**|
 
 ## 并查集
 
