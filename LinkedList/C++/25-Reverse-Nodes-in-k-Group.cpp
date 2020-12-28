@@ -81,3 +81,59 @@ public:
 		return ans;
 	}
 };
+
+
+
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode *dummy = new ListNode();
+        ListNode *pre = dummy, *end = dummy;
+        dummy -> next = head;
+        while(end -> next != nullptr){
+            for(int i = 0; i < k && end != nullptr; i++) end = end -> next;
+            if(end == nullptr) break;
+            ListNode *next = end -> next;
+            ListNode *start = pre -> next;
+            end -> next = nullptr;
+            pre -> next = reverse(start);
+            start -> next = next;
+            
+            pre = start;
+            end = pre;
+        }
+        return dummy -> next;
+        
+    }
+    ListNode* reverse(ListNode *head){
+        if(head == nullptr || head -> next == nullptr) return head;
+        ListNode* node = reverse(head -> next);
+        head -> next -> next = head;
+        head -> next = nullptr;
+        return node;
+    }
+};
+
+
+/*左闭右开*/
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if(head == nullptr || head -> next == nullptr) return head;
+        ListNode *tail = head;
+        for(int i = 0; i < k; i++){
+            if(tail == nullptr) return head;
+            tail = tail -> next;
+        }
+        ListNode *newHead = reverse(head, tail);
+        head -> next = reverseKGroup(tail, k);
+        return newHead;
+    }
+    ListNode* reverse(ListNode *head, ListNode* tail){
+        if(head == nullptr || head -> next == tail) return head;
+        ListNode* node = reverse(head -> next, tail);
+        head -> next -> next = head;
+        head -> next = nullptr;
+        return node;
+    }
+};

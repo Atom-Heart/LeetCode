@@ -6,11 +6,14 @@
 ### 1.1 01背包
 题目|知识点|
 :-|:-|
+|[416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)|判断`true`or`false`的01背包|
 |[474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)|选择求和问题，可以转化成01背包，考察01背包滚动数组优化，**从大到小遍历**|
-|[494. 目标和](https://leetcode-cn.com/problems/target-sum/)|回溯超时，可以转化为子集背包问题
+|:one::star:[494. 目标和](https://leetcode-cn.com/problems/target-sum/)|回溯超时，可以转化为01背包,**背包的体积可能为负数，需要引入一个偏移量将负数变为正数**|
 ### 1.2 完全背包
 题目|知识点|
 :-|:-|
+|[322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)|求最值的完全背包|
+|:one:[518. 零钱兑换 II](https://leetcode-cn.com/problems/coin-change-2/)|**完全背包+记数DP**，在写二维和三维的时候一定要注意**当前背包容量j的范围是从1开始**，从0开始会有bug，因为在`j = 0`的状态多加了|
 ### 1.3 多重背包
 题目|知识点|
 :-|:-|
@@ -41,19 +44,22 @@
 |[650. 只有两个键的键盘](https://leetcode-cn.com/problems/2-keys-keyboard/)|很难，不会|
 |[5631. 跳跃游戏 VI](https://leetcode-cn.com/problems/jump-game-vi/)|**单调队列优化**|
 
+### 4.记数DP
+|题目|知识点|
+:-|:-|
+|[63. 不同路径 II](https://leetcode-cn.com/problems/unique-paths-ii/)|基础题，初始化初始状态的时候要小心一些边界调节|
+|:one:[91. 解码方法](https://leetcode-cn.com/problems/decode-ways/)|各种用例很恶心，要认真读题|
 
-
-
-### 4.区间DP
+### 5.区间DP
 |题目|知识点|
 :-|:-|
 |:two::star:[375. 猜数字大小 II](https://leetcode-cn.com/problems/guess-number-higher-or-lower-ii/)|**博弈思想+区间DP+极小化极大**，状态表示：一.集合：i~j猜数字，最坏情况得到的最低成本。2.属性：最小值。二、状态计算：`dp[i][j] = min(dp[i][j], max(dp[i][k - 1], dp[k + 1][j]) + k)`|
-### 5.树型DP
+### 6.树型DP
 |题目|知识点|
 :-|:-|
 |[96. 不同的二叉搜索树](https://leetcode-cn.com/problems/unique-binary-search-trees/)|G(n) = f(1) + f(2) + ··· + f(n), f(i) = G(n - i) * G(i - 1)；这个题最主要就要明白第二个公式为什么是乘法：因为当以数字i为根节点，即f(i)，左子树G(i - 1)表示i - 1个数组成的子树，右子树G(n - i)表示另外n - i个数组成的子树，因为这两个子树是独立的，所以可以使用乘法法则|
 
-### 6.股票问题
+### 7.股票问题
 |题目|知识点|
 :-|:-|
 |[121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)|只能交易一次|
@@ -62,20 +68,20 @@
 |[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)|只能交易K次|
 |[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)||
 |[714. 买卖股票的最佳时机含手续费](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)||
-### 7.打家劫舍问题
+### 8.打家劫舍问题
 |题目|知识点|
 :-|:-|
-|[198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)||
+|[198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)|基础题，线性DP|
 |[213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/)||
 |[337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/)||
-### 8.最长子序列问题
+### 9.最长子序列问题
 
 > 子串与子序列区别：子串不可跳跃，子序列可以跳跃，如 “AC”是“ABCDEFG”的子序列，而不是子串。 而“ABC”则是其子串
 
 |题目|知识点|
 :-|:-|
 |[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)||
-|[300. 最长上升子序列](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/solution/)||
+|[300. 最长上升子序列](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/solution/)|`dp[i]`表示以`nums[i]`**结尾**的序列，不能把状态定义成“只考虑前i个数”|
 |[516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)||
 |[659. 分割数组为连续子序列](https://leetcode-cn.com/problems/split-array-into-consecutive-subsequences/)|**贪心**，以`nums[i]`结尾的子序列作为状态考虑问题。方法一：**哈希+堆**。方法二：**双哈希**|
 |[673. 最长递增子序列的个数](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/)||
@@ -83,6 +89,15 @@
 |[718. 最长重复子数组](https://leetcode-cn.com/problems/maximum-length-of-repeated-subarray/)|以`str[i]`结尾的字串作为状态。`if(A[i] == B[j]) dp[i][j] == dp[i - 1][j - 1] + 1`|
 |[1143. 最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/)|`dp[i][j]`表示所有在第一个序列的前`i`个字母中出现，且在第二个序列前`j`个字母中出现的子序列。在计算状态的时候，可以按照选不选第`i`个或第`j`个字母为标准将状态划分为(0代表选，1代表不选)00，01，10，11。这道题的难度在于理解**状态的包含关系**：00一定是01和10的子集，所以不用单独判断；01的状态并不是`dp[i - 1][j]`，因为`dp[i - 1][j]`并不一定以`str2[j]`结尾，但是01是`dp[i - 1][j]`的子集，**这种求最值的情况可以通过求大的集合得出小集合的最值**|
 |[1312. 让字符串成为回文串的最少插入次数](https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/submissions/)||
+
+### 10.数塔
+|题目|知识点|
+:-|:-|
+|||
+### 11.斐波那契数列
+|题目|知识点|
+:-|:-|
+|||
 
 ***
 
@@ -375,9 +390,17 @@
 
 
 ## 链表
+
+> 考察角度：链表结构、双指针、分治
+> 记录：61
+
 |题目|知识点|
 :-|:-|
 |:fire:[2. 两数相加](https://leetcode-cn.com/problems/add-two-numbers/)|模拟竖式加法，要设置一个**进位**，要注意最后可能需要添加一个值为1的节点|
+|:one::star:[19. 删除链表的**倒数**第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)|关键在于如何**一次遍历**，这时候可以使用**快慢指针**|
+|:one::star::fire:[23. 合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)|方法一：**归并**。方法二：**堆**|
+|:star:[24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)|需要熟练掌握的链表操作|
+|:one::star::fire:[25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)|非常好的题，要熟练掌握。递归和迭代两种方法|
 |[83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)|递归写法非常巧妙|
 |[82. 删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)|有迭代和递归两种写法，都比较巧妙，和上一个题思想类似|
 |[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)|一头一尾取元素相连，由于想取得尾元素每次都需要遍历链表，所以这里可以优化。**递归方法相当巧妙**|
@@ -439,6 +462,7 @@
 :-|:-|
 |[373. 查找和最小的K对数字](https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/)|这道题主要难点在于怎么写priority_queue的cmp函数，**大堆小于号，小堆大于号**|
 |:star:[692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/)|这道题有助于理解优先队列的排序函数的本质。排序函数是比较两个参数的**优先级**，**如果返回值是true,表明第一个参数优先级大**，反之第二个参数优先级大。在优先队列中，**优先级大的元素在堆底部，优先级小的元素在堆顶**|
+|:star:[5638. 吃苹果的最大数目](https://leetcode-cn.com/problems/maximum-number-of-eaten-apples/)|这道题用堆解决的很巧妙，我没有想到，相当于是**利用堆来对区间进行排序**|
 
 ## 并查集
 
