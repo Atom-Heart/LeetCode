@@ -38,3 +38,30 @@ public:
         return min(max(INT_MIN, sign * ans), INT_MAX);//这一句很关键
     }
 };
+
+
+/*
+*思想就是二进制，设除数是y，被除数是x,被除数可以表示为: y*2^0 + y*2^1 + y*2^2 + y*2^n,然后被除数从高位向低位减，看能剪出多少个被除数
+*/
+class Solution {
+public:
+    int divide(int x, int y) {
+        using LL = long long;
+        vector<LL> exp;
+        bool is_minus = false;
+
+        if(x < 0 && y > 0 || x > 0 && y < 0) is_minus = true;
+        LL a = abs((LL)x), b = abs((LL)y);
+        for(LL i = b; i <= a; i = i + i) exp.push_back(i);
+        LL res = 0;
+        for(int i = exp.size() - 1; i >= 0; i--){
+            if(a >= exp[i]){
+                a -= exp[i];
+                res += 1ll << i;
+            }
+        }
+        if(is_minus) res = -res;
+        if(res > INT_MAX || res < INT_MIN) res = INT_MAX;
+        return res;
+    }
+};

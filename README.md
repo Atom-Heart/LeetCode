@@ -14,6 +14,8 @@
 :-|:-|
 |[322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)|求最值的完全背包|
 |:one:[518. 零钱兑换 II](https://leetcode-cn.com/problems/coin-change-2/)|**完全背包+记数DP**，在写二维和三维的时候一定要注意**当前背包容量j的范围是从1开始**，从0开始会有bug，因为在`j = 0`的状态多加了|
+|:one::star:[377. 组合总和 Ⅳ](https://leetcode-cn.com/problems/combination-sum-iv/)|只是看着像完全背包，完全背包不统计顺序不同的序列。`dp[i]`表示target为`i`的组合个数,所以`dp[i] = dp[i - num1] + dp[i - num2] + .....`|
+|[638. 大礼包](https://leetcode-cn.com/problems/shopping-offers/)||
 ### 1.3 多重背包
 题目|知识点|
 :-|:-|
@@ -35,6 +37,8 @@
 |[97.交错字符串](https://leetcode-cn.com/problems/interleaving-string/)|可以借鉴62.不同路径的思路|
 |[132. 分割回文串 II](https://leetcode-cn.com/problems/palindrome-partitioning-ii/)|dp[i] = min(dp[i], dp[j] + 1 for j in range(i) if s[j + 1, i]是回文);dp[i]表示字符串s[0 ~ i]分割成回文字串的个数|
 |[135. 分发糖果](https://leetcode-cn.com/problems/candy/)|一知半解|
+|:star:[139. 单词拆分](https://leetcode-cn.com/problems/word-break/)|状态定义不好想|
+|:star:[140. 单词拆分 II](https://leetcode-cn.com/problems/word-break-ii/)|**DP+记忆化搜索+字符串区间**，状态定义有技巧，比较难想|
 |[304. 二维区域和检索 - 矩阵不可变](https://leetcode-cn.com/problems/range-sum-query-2d-immutable/)|**计算矩阵区域和**，也就是计算坐标`(i,j)`左上角的区域内的和，状态转移方程：`dp[i][j] = dp[i][j-1] + dp[i-1][j] - dp[i-1][j-1] + matrix[i][j]`|
 |[377. 组合总和 Ⅳ](https://leetcode-cn.com/problems/combination-sum-iv/)|**这道题有点像背包问题，但是同样数字的不同排列属于不同答案这一点和背包问题不同**,这一题的整体思路其实和本系列其他题目差不多，但是这道题只是求路径的总数，不需要求路径本身，用回溯会超时`dp[i] += dp[i - num]`|
 |[357. 计算各个位数不同的数字个数](https://leetcode-cn.com/problems/count-numbers-with-unique-digits/)|方法一：**分治回溯**，主要在于一个细节：当数字的位数大于2时，首位不能为0。方法二：数字的排列组合|
@@ -93,11 +97,19 @@
 ### 10.数塔
 |题目|知识点|
 :-|:-|
-|||
+|[64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)|简单|
+|[118. 杨辉三角](https://leetcode-cn.com/problems/pascals-triangle/)|简单|
+|[119. 杨辉三角 II](https://leetcode-cn.com/problems/pascals-triangle-ii/)|简单|
+|[120. 三角形最小路径和](https://leetcode-cn.com/problems/triangle/)|简单|
 ### 11.斐波那契数列
 |题目|知识点|
 :-|:-|
-|||
+|[509. 斐波那契数](https://leetcode-cn.com/problems/fibonacci-number/)|`dp[i] = dp[i - 1] + dp[i - 2]`|
+|[1137. 第 N 个泰波那契数](https://leetcode-cn.com/problems/n-th-tribonacci-number/)|同上|
+|[70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)|同上|
+|[746. 使用最小花费爬楼梯](https://leetcode-cn.com/problems/min-cost-climbing-stairs/)|题目描述很蠢
+|[198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)|`dp[i] = max(dp[i - 1], dp[i - 2] + nums[i - 2])`|
+|:one::star:[213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/solution/)|**将环形转化为两个线行**，一个是直接不选第一个，一个直接不选最后一个，答案就是这两个情况的最大值|
 
 ***
 
@@ -166,14 +178,25 @@
 
 
 ## 二分搜索
+> 二分流程：确定二分边界；边界二分代码框架；设计一个check(性质)；判断区间如何更新；如果用模板二，计算mid时加1。总结：check函数为真的那一部分在区间右边（也就是mid右边直接不考虑了），用模板一，否则模板二
+> 1.70%的用二分解决的题目都用到了单调性
+> 2.95%的二分题目都是去找一个性质可以把整个区间分成两段，一半满足这个性质，一半不满足这个性质，也可以得到前一半的左端点值，也可以得到后一半的右端点
+
 |题目|知识点|
 :-|:-|
-|[29. 两数相除](https://leetcode-cn.com/problems/divide-two-integers/)|向下取整的除法就是看被除数能够减去多少个除数，一个一个减太浪费时间，应该乘倍的取减，比方说除数是3，那么第二次减就是6，第三次减就是12，以此类推。如果当被除数小于除数，就将除数重置为3，继续上面的操作|
+|:star:[29. 两数相除](https://leetcode-cn.com/problems/divide-two-integers/)|利用**二进制思想**，将被除数表示为1个除数 + 2个除数 + 4个除数 + 8个除数....|
 |:star:[34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)|**在含有重复元素的数组中搜索上下标**，二分搜索的小变种，相当于做了两次搜索，第一次搜索左边界，当`nums[mid] == target`时不能直接返回，必须要确保`mid`左边没有`target`才可以；第二次搜索右边界，返回的原则同上|
+|[35. 搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/)|常规题目|
+|:one::fire::star:[50. Pow(x, n)](https://leetcode-cn.com/problems/powx-n/)|**快速幂思想，将幂次转换为二进制**|
+|[69. Sqrt(x)](https://leetcode-cn.com/problems/sqrtx/)|找到第一个`n * n <= x`的位置，用模板二|
+|[74. 搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/)|**一维转二维**，`x = cur / n(列数)， y = cur % n`|
+|:one:[153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)|check条件我没想到。每次二分`nums[mid]`是确定的，就要看target在`nums[mid]`的哪一边|
 |[162. 寻找峰值](https://leetcode-cn.com/problems/find-peak-element/)|二分的思想就是：**根据某种情况，直接能去掉一半元素**。这道题只是要求我们返回任意一个顶峰，所以我们只需要确定任意一半至少含有一个顶峰就行了，另外一半可以舍弃，我们只需要将`nums[mid]`和`nums[mid+1]`作比较就可以了。**这道题不是有序数组但是却可以用二分法去做**|
+|:one::star:[287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)|利用**抽屉原理**。|
 |:star:[378. 有序矩阵中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)|**值域搜索**,可行解在一个区间内查找，判断这个解是否成立|
 |[532. 数组中的 k-diff 数对](https://leetcode-cn.com/problems/k-diff-pairs-in-an-array/)|**sort+set去重+二分**|
 |[540. 有序数组中的单一元素](https://leetcode-cn.com/problems/single-element-in-a-sorted-array/)|用位运算很好做，用二分比较难想，而且细节很多|
+|[5643. 将数组分成三个子数组的方案数](https://leetcode-cn.com/problems/ways-to-split-array-into-three-subarrays/)|**用二分搜左右边界**，没做出来|
 
 
 ## 双指针
@@ -255,6 +278,9 @@
 |[524. 通过删除字母匹配到字典里最长单词](https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/)|**先将字符串按长度和字典序排序**，然后利用双指针去匹配。这道题一开始往滑动窗口和Hash上去想了，没有想到先要排序，失败！|
 
 ## 前缀和
+
+> 前缀和的数组下标是从1开始的，如果数组下标也是从1开始的，那么计算第i到j的前缀和：`preSum[j] - preSum[i - 1]`；如果数组下标是从0开始的，计算下标i到j的前缀和：`preSum[j + 1] - preSum[i]`
+
 |题目|知识点|讲解|
 :-|:-|:-|
 |:star:[303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/)||
@@ -387,12 +413,13 @@
 |[383. 赎金信](https://leetcode-cn.com/problems/ransom-note/)|遇到英文字母和其出现个数的映射时，可以直接用vector来存储映射关系|
 |[429. N叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)|记录每一层的数量统一遍历|
 |:fire::star:[454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)|相当于从四个等长数组中每个选一个数，判断四数之和是否为0。**利用map存放前两个数组每个数相加的和(key)，val为和出现的次数，然后再去计算第三个第四个数组中所有数字的和，看其相反数有没有出现在map中**，这个题和18题的区别在于，这道题**不用去重**，所以可以使用hash|
+|:star:[5642. 大餐计数](https://leetcode-cn.com/problems/count-good-meals/)|1.两数之和的变种。加入哈希的方式是**先查找再加入**，很好的哈希题目|
 
 
 ## 链表
 
 > 考察角度：链表结构、双指针、分治
-> 记录：61
+> 记录：109
 
 |题目|知识点|
 :-|:-|
@@ -401,12 +428,19 @@
 |:one::star::fire:[23. 合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)|方法一：**归并**。方法二：**堆**|
 |:star:[24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)|需要熟练掌握的链表操作|
 |:one::star::fire:[25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)|非常好的题，要熟练掌握。递归和迭代两种方法|
-|[83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)|递归写法非常巧妙|
-|[82. 删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)|有迭代和递归两种写法，都比较巧妙，和上一个题思想类似|
-|[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)|一头一尾取元素相连，由于想取得尾元素每次都需要遍历链表，所以这里可以优化。**递归方法相当巧妙**|
+|[61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/)|边界条件需要注意一下，很容易出错|
+|:one:[82. 删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)|有迭代和递归两种写法，都比较巧妙，和上一个题思想类似|
+|:one::star:[83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)|递归写法**非常巧妙**|
+|[138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)|双哈希|
+|[141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)|快慢指针|
+|:star::fire::one:[142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)|技巧性强，公式要记住。`slow = n * b; k = a + n * b`|
+|:one:[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)|一头一尾取元素相连，由于想取得尾元素每次都需要遍历链表，所以这里可以优化。**递归方法相当巧妙；考察了求链表中点，逆置链表，交差合并链表**|
+|:one::star:[148. 排序链表](https://leetcode-cn.com/problems/sort-list/)|**链表的归并排序(bottom to up)**，链表的合并和切分操作要熟练掌握|
 |[203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)|**递归解法相当巧妙**|
 |:fire:[206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)|迭代法：设置pre,cur,next；递归：边界条件，调用递归函数的位置|
-|[430. 扁平化多级双向链表](https://leetcode-cn.com/problems/flatten-a-multilevel-doubly-linked-list/)|考察链表的递归|
+|:one:[237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)|直接删除待删除结点（只传入待删除结点），巧妙|
+|:one:[430. 扁平化多级双向链表](https://leetcode-cn.com/problems/flatten-a-multilevel-doubly-linked-list/)|考察链表的递归|
+|[876. 链表的中间结点](https://leetcode-cn.com/problems/middle-of-the-linked-list/)|常用操作，一定要很快写出来|
 
 
 ## 图
