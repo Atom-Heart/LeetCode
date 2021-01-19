@@ -32,6 +32,7 @@
 ### 3.线性DP
 |题目|知识点|
 :-|:-|
+|:one::star::fire:[44. 通配符匹配](https://leetcode-cn.com/problems/wildcard-matching/)|主要记住怎么处理`*`，用到了完全背包的优化方式|
 |[62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)|经典DP问题，dp[i][j] = dp[i - 1][j] + dp[i][j - 1]|
 |[72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)|`dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1])`|
 |[97.交错字符串](https://leetcode-cn.com/problems/interleaving-string/)|可以借鉴62.不同路径的思路|
@@ -39,10 +40,12 @@
 |[135. 分发糖果](https://leetcode-cn.com/problems/candy/)|一知半解|
 |:star:[139. 单词拆分](https://leetcode-cn.com/problems/word-break/)|状态定义不好想|
 |:star:[140. 单词拆分 II](https://leetcode-cn.com/problems/word-break-ii/)|**DP+记忆化搜索+字符串区间**，状态定义有技巧，比较难想|
+|:star:[174. 地下城游戏](https://leetcode-cn.com/problems/dungeon-game/)|**反向DP**，从终点向起点进行状态转移|
 |[304. 二维区域和检索 - 矩阵不可变](https://leetcode-cn.com/problems/range-sum-query-2d-immutable/)|**计算矩阵区域和**，也就是计算坐标`(i,j)`左上角的区域内的和，状态转移方程：`dp[i][j] = dp[i][j-1] + dp[i-1][j] - dp[i-1][j-1] + matrix[i][j]`|
 |[377. 组合总和 Ⅳ](https://leetcode-cn.com/problems/combination-sum-iv/)|**这道题有点像背包问题，但是同样数字的不同排列属于不同答案这一点和背包问题不同**,这一题的整体思路其实和本系列其他题目差不多，但是这道题只是求路径的总数，不需要求路径本身，用回溯会超时`dp[i] += dp[i - num]`|
 |[357. 计算各个位数不同的数字个数](https://leetcode-cn.com/problems/count-numbers-with-unique-digits/)|方法一：**分治回溯**，主要在于一个细节：当数字的位数大于2时，首位不能为0。方法二：数字的排列组合|
 |[368. 最大整除子集](https://leetcode-cn.com/problems/largest-divisible-subset/)|有点类似于300.最长上升子序列。这道题的关键在于**需要返回的是路径而不是状态**|
+|:one::star:[392. 判断子序列](https://leetcode-cn.com/problems/is-subsequence/)|**字串匹配问题,如果有大量待匹配字串，该如何提速呢？**|
 |[413. 等差数列划分](https://leetcode-cn.com/problems/arithmetic-slices/)|基本题目，考察如何选取状态和初始值。数学做法很巧妙，利用了**差分数组**|
 |:fire::star:[516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)|两个元素相等：`if(s[i] == s[j]) dp[i][j] = dp[i + 1][j - 1] + 2;`。**两个元素不相等：**`dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])`。**要注意填表顺序**|
 |[650. 只有两个键的键盘](https://leetcode-cn.com/problems/2-keys-keyboard/)|很难，不会|
@@ -66,10 +69,10 @@
 ### 7.股票问题
 |题目|知识点|
 :-|:-|
-|[121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)|只能交易一次|
-|[122. 买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)|能交易无限次|
-|[123. 买卖股票的最佳时机 III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)||
-|[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)|只能交易K次|
+|[121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)|只能交易一次；不用枚举交易次数;`dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]); dp[i][1] = max(dp[i - 1][1], -prices[i]);`|
+|[122. 买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)|能交易无限次；`dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])`|
+|[123. 买卖股票的最佳时机 III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)|能交易两次；此时需要枚举交易次数`j`（到第`i`天为止，最多进行多少次交易），`dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i])`|
+|[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)|只能交易K次;注意`k == 0 和 i == 0`的base case，状态转移方程和13样|
 |[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)||
 |[714. 买卖股票的最佳时机含手续费](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)||
 ### 8.打家劫舍问题
@@ -86,6 +89,7 @@
 :-|:-|
 |[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)||
 |[300. 最长上升子序列](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/solution/)|`dp[i]`表示以`nums[i]`**结尾**的序列，不能把状态定义成“只考虑前i个数”|
+|[354. 俄罗斯套娃信封问题](https://leetcode-cn.com/problems/russian-doll-envelopes/)|先排序，然后就可以转化为最长上升子序列问题|
 |[516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)||
 |[659. 分割数组为连续子序列](https://leetcode-cn.com/problems/split-array-into-consecutive-subsequences/)|**贪心**，以`nums[i]`结尾的子序列作为状态考虑问题。方法一：**哈希+堆**。方法二：**双哈希**|
 |[673. 最长递增子序列的个数](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/)||
@@ -155,10 +159,20 @@
 
 
 ## 贪心
+
+> 1.如果题目中出现让什么数字最大最小，字符串字典序最大之类的题目，使用单调栈
+
 |题目|知识点|
 :-|:-|
-|[334. 递增的三元子序列](https://leetcode-cn.com/problems/increasing-triplet-subsequence/)|双指针贪心，非常巧妙，并不需要求出递增三元子序列，只需要去判断|、
+|[45. 跳跃游戏 II](https://leetcode-cn.com/problems/jump-game-ii/)|和55思路基本一样|
+|[55. 跳跃游戏](https://leetcode-cn.com/problems/jump-game/)|定一个最大值，然后用`nums[i] + i`不断去更新最大值，如果最大值小于等于`i`，说明无法到达终点|
+|:one::star:[134. 加油站](https://leetcode-cn.com/problems/gas-station/)|如果从第`i`个点无法走到第`j`个点，那么说明`[i + 1, j - 1]`中的所有点都走不到第`j`个点|
+|:one::fire::star:[135. 分发糖果](https://leetcode-cn.com/problems/candy/)|**贪心+记忆化搜索**；问题可以转化为从`ratings[i]`为中心，能向左右走的**最大步数**，因为分数可以理解为台阶，从高台阶可以走到低台阶。|
+|[334. 递增的三元子序列](https://leetcode-cn.com/problems/increasing-triplet-subsequence/)|双指针贪心，非常巧妙，并不需要求出递增三元子序列，只需要去判断|
+|:one:[376. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)|先**去除vector中的重复元素**选择极大或极小值|
+|:fire:[402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)|有一些边界条件需要注意，比如说去除前导零|
 |:star:[435. 无重叠区间](https://leetcode-cn.com/problems/non-overlapping-intervals/)|**区间调度问题**，可以从正反两个方面去考虑。正面：将**区间按左边界升序排序**，如果两个区间出现重叠，那就选择右区间小的那个区间。反向思考：**[求出最多不重复的区间](https://leetcode-cn.com/problems/non-overlapping-intervals/solution/tan-xin-suan-fa-zhi-qu-jian-diao-du-wen-ti-by-labu/)**，这是将区间按照右边界升序排序的|
+|:one::star:[860. 柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/)|贪心性质隐藏的很好，在给20找零的时候，优先使用一张10和一张5的，其次选择三张5的|
 |[1647. 字符频次唯一的最小删除次数](https://leetcode-cn.com/problems/minimum-deletions-to-make-character-frequencies-unique/)|第一次做的时候思考不出解决策略，不知道怎么做会使删除次数最小，因为删除当前数字会影响到其他数字，没有想到先**从大到小排序，先从大的开始删，使删除当前频率只会影响后面的而不会影响前面的**|
 |:star:[5556. 可以到达的最远建筑](https://leetcode-cn.com/problems/furthest-building-you-can-reach/)|精髓的地方在于去维护一个大小和梯子数量一样大的**最小堆**，用来存储到目前为止最大的n个楼间距|
 
@@ -185,17 +199,23 @@
 |题目|知识点|
 :-|:-|
 |:star:[29. 两数相除](https://leetcode-cn.com/problems/divide-two-integers/)|利用**二进制思想**，将被除数表示为1个除数 + 2个除数 + 4个除数 + 8个除数....|
+|:one::star:[33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)|先找旋转数组中的最小值，然后确认`target`在哪个区间中，然后再用二分搜索|
 |:star:[34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)|**在含有重复元素的数组中搜索上下标**，二分搜索的小变种，相当于做了两次搜索，第一次搜索左边界，当`nums[mid] == target`时不能直接返回，必须要确保`mid`左边没有`target`才可以；第二次搜索右边界，返回的原则同上|
 |[35. 搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/)|常规题目|
 |:one::fire::star:[50. Pow(x, n)](https://leetcode-cn.com/problems/powx-n/)|**快速幂思想，将幂次转换为二进制**|
 |[69. Sqrt(x)](https://leetcode-cn.com/problems/sqrtx/)|找到第一个`n * n <= x`的位置，用模板二|
 |[74. 搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/)|**一维转二维**，`x = cur / n(列数)， y = cur % n`|
+|:one:[81. 搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/)|这道题主要要明白为什么旋转数组含有**重复**元素的时候不能用二分。考察了分析两段性正确性问题|
 |:one:[153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)|check条件我没想到。每次二分`nums[mid]`是确定的，就要看target在`nums[mid]`的哪一边|
+|[154. 寻找旋转排序数组中的最小值 II](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/)|和上一题思路一样，**删除重复部分保证两段性**|
 |[162. 寻找峰值](https://leetcode-cn.com/problems/find-peak-element/)|二分的思想就是：**根据某种情况，直接能去掉一半元素**。这道题只是要求我们返回任意一个顶峰，所以我们只需要确定任意一半至少含有一个顶峰就行了，另外一半可以舍弃，我们只需要将`nums[mid]`和`nums[mid+1]`作比较就可以了。**这道题不是有序数组但是却可以用二分法去做**|
+|:one::fire:[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)|技巧题，以矩阵的**右上角**为起点，判断该点是否等于target，如果`matrix[i][j] > target`，说明`j`列以下的所有数都大于`target`,所以删除第`j`列；行同理|
 |:one::star:[287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)|利用**抽屉原理**。|
-|:star:[378. 有序矩阵中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)|**值域搜索**,可行解在一个区间内查找，判断这个解是否成立|
+|:one::star:[378. 有序矩阵中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)|**值域搜索**,可行解在一个区间内查找，判断这个解是否成立|
 |[532. 数组中的 k-diff 数对](https://leetcode-cn.com/problems/k-diff-pairs-in-an-array/)|**sort+set去重+二分**|
 |[540. 有序数组中的单一元素](https://leetcode-cn.com/problems/single-element-in-a-sorted-array/)|用位运算很好做，用二分比较难想，而且细节很多|
+|:star:[875. 爱吃香蕉的珂珂](https://leetcode-cn.com/problems/koko-eating-bananas/)|难点在于**除法向上取整问题**，**(被除数 + 除数 - 1) / 除数**|
+|:star:[1011. 在 D 天内送达包裹的能力](https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/)|和875思想一样，就是check函数有些细节难写|
 |[5643. 将数组分成三个子数组的方案数](https://leetcode-cn.com/problems/ways-to-split-array-into-three-subarrays/)|**用二分搜左右边界**，没做出来|
 
 
@@ -219,6 +239,7 @@
 |[209. 长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/)|**找一个范围使其值满足条件，要联想到滑动窗口**，代码的写法符合滑动窗口的经典框架。思考什么时候增大窗口，增大了以后又怎么对数据进行修改，什么时候减小窗口，减小了以后又要对数据做什么修改，什么时候停止减小窗口|
 |:star:[424. 替换后的最长重复字符](https://leetcode-cn.com/problems/longest-repeating-character-replacement/)|这道题使用了**平移窗口**的策略，因为求的是最大长度，不需要去缩小窗口|
 |:fire::star:[443. 压缩字符串](https://leetcode-cn.com/problems/string-compression/)|**滑动窗口+循环不变量**,扩张窗口的时候可以什么都不做，如果不满足收缩窗口的条件，只移动right坐标就行。思路要灵活，不一定一定要有一个数据结构维护窗口内的元素|
+|:star:[1658. 将 x 减到 0 的最小操作数](https://leetcode-cn.com/problems/minimum-operations-to-reduce-x-to-zero/)|可以转化为滑动窗口问题|
 |[面试题 01.06. 字符串压缩](https://leetcode-cn.com/problems/compress-string-lcci/)|和**443**基本一样，但没有用循环不变量，稍简一点|
 ## DFS
 |题目|知识点|
@@ -276,6 +297,7 @@
 |[324. 摆动排序 II](https://leetcode-cn.com/problems/wiggle-sort-ii/)|要求把数字排列成`nums[i]<nums[i+1]>nums[i+2]<...`。可以考虑把串数字先排序，然后再一分为二，然后交替插入新的数组中，陷阱在于如果前后两个数组出现了相同的数字，会导致最终结果出现多个相同数字相邻的情况|
 |[327. 区间和的个数](https://leetcode-cn.com/problems/count-of-range-sum/)|方法一：使用的multise容器和它的方法lower_bound、upper_bound、distance。**通过multiset无序转有序，在multiset中使用二分搜索**。方法二：**利用归并排序思想**，没做。这题很难|
 |[524. 通过删除字母匹配到字典里最长单词](https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/)|**先将字符串按长度和字典序排序**，然后利用双指针去匹配。这道题一开始往滑动窗口和Hash上去想了，没有想到先要排序，失败！|
+|:star:[1727. 重新排列后的最大子矩阵](https://leetcode-cn.com/problems/largest-submatrix-with-rearrangements/)|**贪心+排序+数组，85题的简化版**，最关键在于如何表示第`j`列的高度，因为矩阵中某一列中的‘1’不是连续的。基本指导思想还是枚举高度|
 
 ## 前缀和
 
@@ -364,6 +386,10 @@
 
 ## 树
 
+> 1.满二叉树：每个结点都有两个或零个子结点；
+2.完美二叉树：除了最后一层，每个节点都有两个子节点；
+3.完全二叉树：除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置
+
 |题目|知识点|
 :-|:-|
 |:star:[94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)|**颜色标记法**|
@@ -378,6 +404,7 @@
 |:star:[124. 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)|**利用全局变量特判保证不改变递归函数的整体功能**，和**687题类似**|
 |:star:[144. 二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)|**颜色标记法，入栈顺序和访问顺序相反**|
 |:star:[145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/)|**颜色标记法**|
+|:one:[230. 二叉搜索树中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/)|考察了二叉搜索树和中序遍历结果和第K小元素之间的关系：二叉搜索树中第K小的元素就是中序遍历中第K个访问到的节点值|
 |[235. 二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)|这个题要利用二叉排序树本身的性质，如果当前节点的大小位于两个目标节点之间，那么这个节点就是最近的公共节点，如果两个节点都比当前节点大，那么LCA一定在当前节点的右子树；如果两个节点都比当前节点小，那么LCA一定在当前节点的左子树|
 |[257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)|分治和DFS都可以做|
 |:star:[297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)|将一颗二叉树序列化，有前序和中序两种序列可以选择，然后又可以通过序列化的结果重构这颗二叉树。**前序序列化充分利用了分治的思想**，十分巧妙|
@@ -413,6 +440,7 @@
 |[383. 赎金信](https://leetcode-cn.com/problems/ransom-note/)|遇到英文字母和其出现个数的映射时，可以直接用vector来存储映射关系|
 |[429. N叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)|记录每一层的数量统一遍历|
 |:fire::star:[454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)|相当于从四个等长数组中每个选一个数，判断四数之和是否为0。**利用map存放前两个数组每个数相加的和(key)，val为和出现的次数，然后再去计算第三个第四个数组中所有数字的和，看其相反数有没有出现在map中**，这个题和18题的区别在于，这道题**不用去重**，所以可以使用hash|
+|[1726. 同积元组](https://leetcode-cn.com/problems/tuple-with-same-product/)|需要用到排列组合的思想|
 |:star:[5642. 大餐计数](https://leetcode-cn.com/problems/count-good-meals/)|1.两数之和的变种。加入哈希的方式是**先查找再加入**，很好的哈希题目|
 
 
@@ -455,11 +483,15 @@
 
 ## 单调栈
 
+
 > 1.涉及到按照字典序选择元素
+> 2.找第一个比当前元素大或小的元素
 
 |题目|知识点|
 :-|:-|
-|[316. 去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)|利用了和402一样的思想，由于**去掉重复字母后要保证整个字符串相对顺序不被改变而且字典序最小**，那么这个时候就要考虑单调栈了|
+|:two::fire::star:[84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)|核心思想是**枚举高度**，找到以某个高度为中心，左右两边第一个小于该高度的位置，这样就可以得到宽度|
+|:one::fire::star:[85. 最大矩形](https://leetcode-cn.com/problems/maximal-rectangle/)|84题升级版，主要在于**通过递推的思想预处理一个表示矩阵高度的数组**，然后枚举高度数组的下边界，使用84题的方法计算最大面积|
+|:one:[316. 去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)|利用了和402一样的思想，由于**去掉重复字母后要保证整个字符串相对顺序不被改变而且字典序最小**，那么这个时候就要考虑单调栈了|
 |[321. 拼接最大数](https://leetcode-cn.com/problems/create-maximum-number/)|这个题是从两个vector中选出K个数字，要求组成的数字最大。**分治+单调队列**,这道题需要考虑的细节比较多，有难度。按字典序比较两个序列大小的函数`bool lexicographical_compare(it1_begin(), it1_end(), it2.begin(), it2.end())`|
 |:star:[402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)|**根据字典序或数字大小进行选择或删除---->单调栈**。在一个字符串表示的数中移除K位，使得数字最小。一开始我用的回溯，但是超时了，原因在于我没有利用题中的有关信息，因为想让某个数字最小，只要让这个数字的最高位尽可能小就可以了。所以使用了**单调栈**进行优化，如果后一个数字大于前一个数字，那么就将前一个数字出栈|
 |[496. 下一个更大元素 I](https://leetcode-cn.com/problems/next-greater-element-i/)|核心就是找出在位置`i`后第一个比`nums[i]`大的数字，维护一个单调递减队列|
@@ -496,6 +528,7 @@
 :-|:-|
 |[373. 查找和最小的K对数字](https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/)|这道题主要难点在于怎么写priority_queue的cmp函数，**大堆小于号，小堆大于号**|
 |:star:[692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/)|这道题有助于理解优先队列的排序函数的本质。排序函数是比较两个参数的**优先级**，**如果返回值是true,表明第一个参数优先级大**，反之第二个参数优先级大。在优先队列中，**优先级大的元素在堆底部，优先级小的元素在堆顶**|
+|:one::star:[1642. 可以到达的最远建筑](https://leetcode-cn.com/problems/furthest-building-you-can-reach/)|**贪心+小根堆**|
 |:star:[5638. 吃苹果的最大数目](https://leetcode-cn.com/problems/maximum-number-of-eaten-apples/)|这道题用堆解决的很巧妙，我没有想到，相当于是**利用堆来对区间进行排序**|
 
 ## 并查集
@@ -513,6 +546,7 @@
 :-|:-|
 |[684. 冗余连接](https://leetcode-cn.com/problems/redundant-connection/)|判断**无向图中是否存在环**，如果两个集合的代表元素相同，则说明有环|
 |[685. 冗余连接 II](https://leetcode-cn.com/problems/redundant-connection-ii/)|判断**有向图中是否有环,但拓扑排序不适合用于解决这个问题**，因为题目中的要求是返回一条需要删除的边。这道题可以转化为684，因为题中说“附加的边的两个顶点包含在1到N中间，这条附加的边不属于树中已存在的边”，所以每个结点的入度要不就是全是1，要么有一个节点的入度为2，其他的都是1。|
+|:star:[5650. 执行交换操作后的最小汉明距离](https://leetcode-cn.com/problems/minimize-hamming-distance-after-swap-operations/)|**并查集+哈希**；并查集记录连通块的下标，用哈希记录每个祖宗结点代表的联通集合中的元素值|
 
 ## Trie树
 > 1.统计字符串出现的次数
