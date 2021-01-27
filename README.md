@@ -72,9 +72,9 @@
 |[121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)|只能交易一次；不用枚举交易次数;`dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]); dp[i][1] = max(dp[i - 1][1], -prices[i]);`|
 |[122. 买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)|能交易无限次；`dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])`|
 |[123. 买卖股票的最佳时机 III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)|能交易两次；此时需要枚举交易次数`j`（到第`i`天为止，最多进行多少次交易），`dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i])`|
-|[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)|只能交易K次;注意`k == 0 和 i == 0`的base case，状态转移方程和13样|
+|[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)|只能交易K次;注意`k == 0 和 i == 0`的base case，状态转移方程和123一样|
 |[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)||
-|[714. 买卖股票的最佳时机含手续费](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)||
+|[714. 买卖股票的最佳时机含手续费](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)|`dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]); dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i] - fee)`|
 ### 8.打家劫舍问题
 |题目|知识点|
 :-|:-|
@@ -130,6 +130,7 @@
 |题目|知识点|
 :-|:-|
 |[131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/)|这个题就是求字串，但是还要保存之前求出的字串的路径，而且每个字串必须还要是回文串|
+|:::star:[842. 将数组拆分成斐波那契序列](https://leetcode-cn.com/problems/split-array-into-fibonacci-sequence/)|**为预防当字符串转整型出现溢出，可以在操作前判断是否溢出**。用字符串的大数加法会溢出|
 
 ### 第3部分：组合问题
 |题目|知识点|
@@ -161,6 +162,7 @@
 ## 贪心
 
 > 1.如果题目中出现让什么数字最大最小，字符串字典序最大之类的题目，使用单调栈
+> 2.经常使用大小堆获取迭代过程中的最值
 
 |题目|知识点|
 :-|:-|
@@ -172,9 +174,11 @@
 |:one:[376. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)|先**去除vector中的重复元素**选择极大或极小值|
 |:fire:[402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)|有一些边界条件需要注意，比如说去除前导零|
 |:star:[435. 无重叠区间](https://leetcode-cn.com/problems/non-overlapping-intervals/)|**区间调度问题**，可以从正反两个方面去考虑。正面：将**区间按左边界升序排序**，如果两个区间出现重叠，那就选择右区间小的那个区间。反向思考：**[求出最多不重复的区间](https://leetcode-cn.com/problems/non-overlapping-intervals/solution/tan-xin-suan-fa-zhi-qu-jian-diao-du-wen-ti-by-labu/)**，这是将区间按照右边界升序排序的|
+|:two::star:[659. 分割数组为连续子序列](https://leetcode-cn.com/problems/split-array-into-consecutive-subsequences/)|**贪心+大小堆**，如果存在一个以`nums[i] - 1`为结尾的子序列，那么`nums[i]`就可以和其组成长度加一的新的子序列；如果有多个长度以`nums[i] - 1`结尾的子序列，那么就选择一个长度最小的，所以需要使用最小堆|
 |:one::star:[860. 柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/)|贪心性质隐藏的很好，在给20找零的时候，优先使用一张10和一张5的，其次选择三张5的|
+|:one::star:[1642. 可以到达的最远建筑](https://leetcode-cn.com/problems/furthest-building-you-can-reach/)|精髓的地方在于去维护一个大小和梯子数量一样大的**最小堆**，用来存储到目前为止最大的n个楼间距|
 |[1647. 字符频次唯一的最小删除次数](https://leetcode-cn.com/problems/minimum-deletions-to-make-character-frequencies-unique/)|第一次做的时候思考不出解决策略，不知道怎么做会使删除次数最小，因为删除当前数字会影响到其他数字，没有想到先**从大到小排序，先从大的开始删，使删除当前频率只会影响后面的而不会影响前面的**|
-|:star:[5556. 可以到达的最远建筑](https://leetcode-cn.com/problems/furthest-building-you-can-reach/)|精髓的地方在于去维护一个大小和梯子数量一样大的**最小堆**，用来存储到目前为止最大的n个楼间距|
+|:one:[1663. 具有给定数值的最小字符串](https://leetcode-cn.com/problems/smallest-string-with-a-given-numeric-value/)|差不多能想到贪心，但是还是用dfs做了，很呆。能选1就选1，选不了就让后面位置都选最大的，当前选一个尽可能小的|
 
 
 
@@ -222,7 +226,8 @@
 ## 双指针
 |题目|知识点|
 :-|:-|
-|:fire::star:[18. 四数之和](https://leetcode-cn.com/problems/4sum/)|**四指针+去重**，用两个for循环表示前两个指针，在进行双指针查找，这道题的去重手法很重要，重点看|
+|:two::fire::star:[15. 三数之和](https://leetcode-cn.com/problems/3sum/)|**三指针+去重**|
+|:two::fire::star:[18. 四数之和](https://leetcode-cn.com/problems/4sum/)|**四指针+去重**，用两个for循环表示前两个指针，在进行双指针查找，这道题的去重手法很重要，重点看|
 |:star:[26. 删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)|一个指针指向能插入的位置，另一个指针指向待插入的元素。判断一个数是不是能被插入的方法是：判断这个数是不是和前一个数相等|
 |:star:[56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)|如果区间重复，则将区间合并为一个区间。**经典字符串题目**|
 |[80. 删除排序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/)|这个题和前一道题的区别在于，这道题可以允许有一个数字出现两次。这两道题不难，但写出简洁的代码是有难度的|
@@ -236,10 +241,11 @@
 |题目|知识点|
 :-|:-|
 |:star:[3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)|经典滑动窗口题目|
+|:one::fire:[76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/solution/)|不会做的点在于不知道怎么判断窗口是否合法|
 |[209. 长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/)|**找一个范围使其值满足条件，要联想到滑动窗口**，代码的写法符合滑动窗口的经典框架。思考什么时候增大窗口，增大了以后又怎么对数据进行修改，什么时候减小窗口，减小了以后又要对数据做什么修改，什么时候停止减小窗口|
 |:star:[424. 替换后的最长重复字符](https://leetcode-cn.com/problems/longest-repeating-character-replacement/)|这道题使用了**平移窗口**的策略，因为求的是最大长度，不需要去缩小窗口|
 |:fire::star:[443. 压缩字符串](https://leetcode-cn.com/problems/string-compression/)|**滑动窗口+循环不变量**,扩张窗口的时候可以什么都不做，如果不满足收缩窗口的条件，只移动right坐标就行。思路要灵活，不一定一定要有一个数据结构维护窗口内的元素|
-|:star:[1658. 将 x 减到 0 的最小操作数](https://leetcode-cn.com/problems/minimum-operations-to-reduce-x-to-zero/)|可以转化为滑动窗口问题|
+|:star:[1658. 将 x 减到 0 的最小操作数](https://leetcode-cn.com/problems/minimum-operations-to-reduce-x-to-zero/)|逆向思考，可以转化为滑动窗口问题|
 |[面试题 01.06. 字符串压缩](https://leetcode-cn.com/problems/compress-string-lcci/)|和**443**基本一样，但没有用循环不变量，稍简一点|
 ## DFS
 |题目|知识点|
@@ -301,13 +307,14 @@
 
 ## 前缀和
 
-> 前缀和的数组下标是从1开始的，如果数组下标也是从1开始的，那么计算第i到j的前缀和：`preSum[j] - preSum[i - 1]`；如果数组下标是从0开始的，计算下标i到j的前缀和：`preSum[j + 1] - preSum[i]`
+> 1.前缀和的数组下标是从1开始的，如果数组下标也是从1开始的，那么计算第i到j的前缀和：`preSum[j] - preSum[i - 1]`；如果数组下标是从0开始的，计算下标i到j的前缀和：`preSum[j + 1] - preSum[i]`
+> 2.二维前缀和：`dp[i][j] = dp[i - 1][j] + dp[i][j - 1] + matrix[i - 1][j - 1] - dp[i - 1][j - 1]`
 
 |题目|知识点|讲解|
 :-|:-|:-|
 |:star:[303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/)||
 |:star:[304. 二维区域和检索 - 矩阵不可变](https://leetcode-cn.com/problems/range-sum-query-2d-immutable/)||
-|:star:[523. 连续的子数组和](https://leetcode-cn.com/problems/continuous-subarray-sum/)|**前缀和 + Hash(值和下标的映射) + 数学**，`(preSum[i] - preSum[j]) % k == 0`相当于`preSum[i] % k == preSum[j] % k`|
+|:star:[523. 连续的子数组和](https://leetcode-cn.com/problems/continuous-subarray-sum/)|**前缀和 + Hash(值和下标的映射) + 数学**，`(preSum[i] - preSum[j]) % k == 0`相当于`preSum[i] %  k == preSum[j] % k`|
 |:star:[1314. 矩阵区域和](https://leetcode-cn.com/problems/matrix-block-sum/)||
 |:star:[1664. 生成平衡数组的方案数](https://leetcode-cn.com/problems/ways-to-make-a-fair-array/)|创建**奇数项的前缀和**和**偶数项的前缀和**，主要难点在奇偶前缀和数组所代表的意义，先来考虑一下普通的前缀数组所代表的意义：`nums[i],0<=i<=n - 1`，`preSum[i],0<=i<=n`，`preSum[i]`有两种解释的方法：1.原数组第i项之前的前缀和（i = 0, 1, ...., n）2.用原数组的下标访问前缀和数组，原数组前i项（不包括`nums[i]`）的前缀和。   `oddPreSum[i],0 <= i <= n`表示原数组中前i项（不包括`nums[i]`）中奇数的前缀和|
 
@@ -392,7 +399,7 @@
 
 |题目|知识点|
 :-|:-|
-|:star:[94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)|**颜色标记法**|
+|:one::star:[94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)|**颜色标记法**,白色表示没有访问过，灰色表示访问过|
 |[**95. 不同的二叉搜索树 II**](https://leetcode-cn.com/problems/unique-binary-search-trees-ii/)|这道题用了递归的思想，非常非常巧妙，重点看。还可以动态规划的思想做，但我没看|
 |[105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)|前序遍历的第一个节点一定是二叉树的根节点，然后在中序遍历中寻找根节点的位置，可以把二叉树分为左右两个子树，并且还可以知道左右子树所含节点的个数。然后再对左右子树进行相同的操作。这就是分治的思想|
 |[106. 从中序与后序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)|后序遍历中最后一个节点一定是二叉树的根节点，然后在中序遍历中寻找根节点的位置，可以把二叉树分为左右两个子树。整体思想和上题一样|
@@ -426,22 +433,45 @@
 |:star:[459. 重复的子字符串](https://leetcode-cn.com/problems/repeated-substring-pattern/)|巧妙方法：将字符串加倍，然后从第一个位置寻找原字符串，这个方法太巧妙。常规方法：利用KMP里的思想，没做|
 |:fire:[468. 验证IP地址](https://leetcode-cn.com/problems/validate-ip-address/)|这道题有**split()函数的模板写法**。本题需要考虑很多细节，想去判断一个字符串合不合法，**可以去想什么时候该字符串不合法**，反向思考简化判断过程|
 |[696. 计数二进制子串](https://leetcode-cn.com/problems/count-binary-substrings/)|很巧妙，要从字符串自身结构入手优化|
-|[5603. 确定两个字符串是否接近](https://leetcode-cn.com/problems/determine-if-two-strings-are-close/)|给出两个操作，判断能不能将字符串转化为另一个字符串。**考察字符串转换条件**|
+|:two::star:[1657. 确定两个字符串是否接近](https://leetcode-cn.com/problems/determine-if-two-strings-are-close/)|给出两个操作，判断能不能将字符串转化为另一个字符串。**考察字符串转换条件**|
+|:star:[5662. 满足三条件之一需改变的最少字符数](https://leetcode-cn.com/problems/change-minimum-characters-to-satisfy-one-of-three-conditions/)|**如果字符串中只涉及26个英文字母，可以考虑直接暴力枚举**|
 
 
 
 ## 哈希表
+
+> 1、判断一些数中有没有出现某个数
+
 |题目|知识点|
 :-|:-|
-|[36. 有效的数独](https://leetcode-cn.com/problems/valid-sudoku/)|board中的整数被限制在0~9中，因此可以分别建立哈希表来存储任意一个数在响应维度上是否出现过。这道题的主要难点在于如何判断board[i][j]是否在其属于的哪个3×3的表中出现过。9×9的矩阵可以理解为9个3×3的矩阵，要做的就是通过i,j确定board[i][j]在哪一个3×3的矩阵里，公式就是j / 3 + (i / 3) * 3|
+|:star:[1. 两数之和](https://leetcode-cn.com/problems/two-sum/)|经典哈希问题|
+|:one::star:[30. 串联所有单词的子串](https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/)|**双哈希**，第一个hash记录所有字典里的单词，第二个哈希记录当前遍历的单词。这个题有很多细节，很容易错|
 |[30. 串联所有单词的子串](https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/)|给出多个长度相同的单词，找包含这些单词的所有**连续子串**，因为单词之间的排列可以有很多种，所以很难去进行字符串之间的匹配，所以可以转而去考虑每个单词出现的次数，如果当前匹配的子串目标单词出现的次数和字典中单词出现的次数是一样的话，就说明匹配成功|
+|:two::star:[36. 有效的数独](https://leetcode-cn.com/problems/valid-sudoku/)|board中的整数被限制在0~9中，因此可以分别建立哈希表来存储任意一个数在相应维度上是否出现过。这道题的主要难点在于如何判断board[i][j]是否在其属于的哪个3×3的表中出现过。9×9的矩阵可以理解为9个3×3的矩阵，要做的就是通过i,j确定board[i][j]在哪一个3×3的矩阵里，公式就是j / 3 + (i / 3) * 3|
+|[49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)|所谓的异构词，就是按字典序排序后相同的字符串，所以先排序，然后再哈希。这种类似的题周赛出现过，要从字符串本身找出规律|
+|:one::fire::star:[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/)|经典哈希题目，这个题的思想要熟练|
+|:two::fire:[138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)|双哈希；没想到用vector保存新的链表结点并用下标做映射|
+|:one:[187. 重复的DNA序列](https://leetcode-cn.com/problems/repeated-dna-sequences/)|经典题目|
+|:star:[290. 单词规律](https://leetcode-cn.com/problems/word-pattern/)|**双哈希**，需要考虑很多边界条件|
 |[336. 回文对](https://leetcode-cn.com/problems/palindrome-pairs/)|又考察了和利用回文串的自身性质：**如果一个字符串是回文串，那么必然有一个对称中心，沿着这个对称中心依次向两边扩展得到的连续字串还是回文串，并且，和中心对称的左右两个字串的顺序是相反的**。那么，我可以依次选择一个字符串的所有位置当作对称中心，将原字符串分为左右两个部分，当其中一边是回文串的时候，看字典中是否存在另一边逆序的字符串，如果存在，就可以累加得到一个新的回文串|
+|:two:[350. 两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)|经典题目|
 |[352. 将数据流变为多个不相交区间](https://leetcode-cn.com/problems/data-stream-as-disjoint-intervals/)|**两个order_map存储区间**，左端点->右端点，右端点->左端点，当插入一个点进去的时候要去判断是否和左右两个区间相交，如果相交，合并区间后要删除之前的映射关系|
 |[383. 赎金信](https://leetcode-cn.com/problems/ransom-note/)|遇到英文字母和其出现个数的映射时，可以直接用vector来存储映射关系|
+|:two::fire::star:[454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)|经典哈希题目，先计算出前两个数的所有可能的和，并保存在map中；再遍历后两个数的和，看是否等于前两个数的和的相反数|
 |[429. N叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)|记录每一层的数量统一遍历|
-|:fire::star:[454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)|相当于从四个等长数组中每个选一个数，判断四数之和是否为0。**利用map存放前两个数组每个数相加的和(key)，val为和出现的次数，然后再去计算第三个第四个数组中所有数字的和，看其相反数有没有出现在map中**，这个题和18题的区别在于，这道题**不用去重**，所以可以使用hash|
-|[1726. 同积元组](https://leetcode-cn.com/problems/tuple-with-same-product/)|需要用到排列组合的思想|
+|:one::fire::star:[454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)|相当于从四个等长数组中每个选一个数，判断四数之和是否为0。**利用map存放前两个数组每个数相加的和(key)，val为和出现的次数，然后再去计算第三个第四个数组中所有数字的和，看其相反数有没有出现在map中**，这个题和18题的区别在于，这道题**不用去重**，所以可以使用hash|
+|:star:[652. 寻找重复的子树](https://leetcode-cn.com/problems/find-duplicate-subtrees/)|**树的序列化+哈希**,先通过树的前序遍历构造每一个子树的序列，构造方式为：`string str = to_string(root -> val) + " " + inOrder(root -> left) + " " + inOrder(root -> right)`，结点为`nullptr`的话就返回`#`|
+|[1726. 同积元组](https://leetcode-cn.com/problems/tuple-with-same-product/)|454题的改编版本，需要用到排列组合的思想|
 |:star:[5642. 大餐计数](https://leetcode-cn.com/problems/count-good-meals/)|1.两数之和的变种。加入哈希的方式是**先查找再加入**，很好的哈希题目|
+
+## 前缀和与哈希
+|题目|知识点|
+:-|:-|
+|:star:[523. 连续的子数组和](https://leetcode-cn.com/problems/continuous-subarray-sum/)|**前缀和 + Hash(值和下标的映射) + 数学**，`(preSum[i] - preSum[j]) % k == 0`相当于`preSum[i] %  k == preSum[j] % k`|
+|[554. 砖墙](https://leetcode-cn.com/problems/brick-wall/)|难点在于转化题意|
+|:one::fire::star:[560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)|**哈希+前缀和**；如果直接计算完前缀和然后两两前缀和相减会超时；这道题的技巧在于在计算前缀和过程中，直接去搜索已经计算过的并且符号要求的前缀和|
+|[974. 和可被 K 整除的子数组](https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/)|和523类似，涉及一点数学知识。难点在于当负数对正数做取余操作怎么处理，比如`-1 % 4`，C++中结果为`-1`，但实际上要给`-1`加上`4`才是最终结果|
+
 
 
 ## 链表
@@ -459,7 +489,7 @@
 |[61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/)|边界条件需要注意一下，很容易出错|
 |:one:[82. 删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)|有迭代和递归两种写法，都比较巧妙，和上一个题思想类似|
 |:one::star:[83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)|递归写法**非常巧妙**|
-|[138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)|双哈希|
+|:two::fire:[138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)|双哈希|
 |[141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)|快慢指针|
 |:star::fire::one:[142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)|技巧性强，公式要记住。`slow = n * b; k = a + n * b`|
 |:one:[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)|一头一尾取元素相连，由于想取得尾元素每次都需要遍历链表，所以这里可以优化。**递归方法相当巧妙；考察了求链表中点，逆置链表，交差合并链表**|
@@ -489,8 +519,8 @@
 
 |题目|知识点|
 :-|:-|
-|:two::fire::star:[84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)|核心思想是**枚举高度**，找到以某个高度为中心，左右两边第一个小于该高度的位置，这样就可以得到宽度|
-|:one::fire::star:[85. 最大矩形](https://leetcode-cn.com/problems/maximal-rectangle/)|84题升级版，主要在于**通过递推的思想预处理一个表示矩阵高度的数组**，然后枚举高度数组的下边界，使用84题的方法计算最大面积|
+|:three::fire::star:[84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)|核心思想是**枚举高度**，找到以某个高度为中心，左右两边第一个小于该高度的位置，这样就可以得到宽度|
+|:two::fire::star:[85. 最大矩形](https://leetcode-cn.com/problems/maximal-rectangle/)|84题升级版，主要在于**通过递推的思想预处理一个表示矩阵高度的数组**，然后枚举高度数组的下边界，使用84题的方法计算最大面积|
 |:one:[316. 去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)|利用了和402一样的思想，由于**去掉重复字母后要保证整个字符串相对顺序不被改变而且字典序最小**，那么这个时候就要考虑单调栈了|
 |[321. 拼接最大数](https://leetcode-cn.com/problems/create-maximum-number/)|这个题是从两个vector中选出K个数字，要求组成的数字最大。**分治+单调队列**,这道题需要考虑的细节比较多，有难度。按字典序比较两个序列大小的函数`bool lexicographical_compare(it1_begin(), it1_end(), it2.begin(), it2.end())`|
 |:star:[402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)|**根据字典序或数字大小进行选择或删除---->单调栈**。在一个字符串表示的数中移除K位，使得数字最小。一开始我用的回溯，但是超时了，原因在于我没有利用题中的有关信息，因为想让某个数字最小，只要让这个数字的最高位尽可能小就可以了。所以使用了**单调栈**进行优化，如果后一个数字大于前一个数字，那么就将前一个数字出栈|
