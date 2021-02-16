@@ -61,24 +61,20 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        if(root == nullptr) return root;
-        Node *pre = root;
-        while(pre -> left != nullptr){
-            Node *temp = pre;
-            while(temp != nullptr){
-                temp -> left -> next = temp -> right;
-                if(temp -> next != nullptr){
-                    temp -> right -> next = temp -> next -> left;
+        if(root == NULL) return root;
+        Node *ptr = root;
+        while(root -> left){
+            for(auto p = root; p; p = p -> next){
+                p -> left -> next = p -> right;
+                if(p -> next){
+                    p -> right -> next = p -> next -> left;
                 }
-                temp = temp -> next;
             }
-            pre = pre -> left;
+            root = root -> left;
         }
-        return root;
-        
+        return ptr;
     }
 };
-
 
 /*递归写法*/
 class Solution {

@@ -24,3 +24,14 @@ public:
         return min(left, right) + 1;
     }
 };
+
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        if(root == nullptr) return 0;
+        if(root -> left == nullptr && root -> right == nullptr) return 1;
+        int x = minDepth(root -> left);
+        int y = minDepth(root -> right);
+        return root -> left == nullptr || root -> right == nullptr ? x + y + 1 : min(x, y) + 1;
+    }
+};

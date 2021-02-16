@@ -37,3 +37,22 @@ public:
 
 /*对于这种数组问题，关键点在于元素和索引是成对出现的，常用的方法是“排序”，“异或”，“映射”*/
 /*映射的思路就是将每个索引和元素对应起来，通过正负号记录某个元素是否被映射*/
+
+
+
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        int x, y;
+        int n = nums.size();
+        vector<int> hash(n + 1, 0);
+        for(int num : nums){
+            hash[num]++;
+        }
+        for(int i = 1; i <= n; i++){
+            if(hash[i] == 0) y = i;
+            if(hash[i] == 2) x = i;
+        }
+        return {x, y};
+    }
+};
