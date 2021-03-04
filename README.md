@@ -27,7 +27,7 @@
 ### 2.博奕型DP
 |题目|知识点|
 :-|:-|
-|[292. Nim 游戏](https://leetcode-cn.com/problems/nim-game/)|dp[n] = !(dp[n - 1] && dp[n - 2] && dp[n - 3])，先手如果想胜利且先手足够聪明（聪明的意思就是先手如果能胜利的话，一定会选择一个能让自己胜利的取法），那么只要后手有失败的可能，那么先手就会胜利。如果不管先手取几个，剩下的情况让后手去取，后手都会胜利的话，那么先手就会输|
+|:two::fire:[292. Nim 游戏](https://leetcode-cn.com/problems/nim-game/)|dp[n] = !(dp[n - 1] && dp[n - 2] && dp[n - 3])，先手如果想胜利且先手足够聪明（聪明的意思就是先手如果能胜利的话，一定会选择一个能让自己胜利的取法），那么只要后手有失败的可能，那么先手就会胜利。如果不管先手取几个，剩下的情况让后手去取，后手都会胜利的话，那么先手就会输|
 
 ### 3.线性DP
 |题目|知识点|
@@ -66,6 +66,7 @@
 |题目|知识点|
 :-|:-|
 |:three::fire:[96. 不同的二叉搜索树](https://leetcode-cn.com/problems/unique-binary-search-trees/)|G(n) = f(1) + f(2) + ··· + f(n), f(i) = G(n - i) * G(i - 1)；这个题最主要就要明白第二个公式为什么是乘法：因为当以数字i为根节点，即f(i)，左子树G(i - 1)表示i - 1个数组成的子树，右子树G(n - i)表示另外n - i个数组成的子树，因为这两个子树是独立的，所以可以使用乘法法则|
+|:two::fire:[337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/)|每个结点都有选和不选两种方式，如果选了根节点，那就左右子树就不能选其根节点；如果不选根节点，那么左右子树就可以选左右子树选不选根节点的最大值|
 
 ### 7.股票问题
 |题目|知识点|
@@ -91,7 +92,7 @@
 |:one::fire:[53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)|如果前面的和还没有当前位置大，那么从当前位置开始继续累加|
 |[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)||
 |:two::fire:[152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray/)|记录一个以`i - 1`为终点的最大值和最小值，然后根据`nums[i]`大于0或小于0分别处理|
-|[300. 最长上升子序列](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/solution/)|`dp[i]`表示以`nums[i]`**结尾**的序列，不能把状态定义成“只考虑前i个数”|
+|:fire:[300. 最长上升子序列](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/solution/)|`dp[i]`表示以`nums[i]`**结尾**的序列，不能把状态定义成“只考虑前i个数”|
 |[354. 俄罗斯套娃信封问题](https://leetcode-cn.com/problems/russian-doll-envelopes/)|先排序，然后就可以转化为最长上升子序列问题|
 |[516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)||
 |[659. 分割数组为连续子序列](https://leetcode-cn.com/problems/split-array-into-consecutive-subsequences/)|**贪心**，以`nums[i]`结尾的子序列作为状态考虑问题。方法一：**哈希+堆**。方法二：**双哈希**|
@@ -127,7 +128,7 @@
 :-|:-|
 |:one::fire:[78. 子集](https://leetcode-cn.com/problems/subsets/)|这个题目中不会出现重复元素，且每个元素只能被选一次，这就要考虑深度和选择之间的关系，在递归调用时，传入的深度参数应该是当前深度+1
 |:one::fire:[90. 子集 II](https://leetcode-cn.com/problems/subsets-ii/)|这个题的考点就是如何去重，首先要先排序，因为子集[1,2]和子集[2,1]其实是一样的，所以子集问题可以理解为选择一个或多个元素构成的**组合**有多少种|
-|||
+
 
 ### 第2部分：字串问题
 |题目|知识点|
@@ -138,14 +139,14 @@
 ### 第3部分：组合问题
 |题目|知识点|
 :-|:-|
-|[39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)|**无重复数字，但每个数字可以重复使用**。需要通过剪枝去除不必要的计算，**通过排序数组，传入回溯的起始位置来去重**|
-|[40. 组合总和 II](https://leetcode-cn.com/problems/combination-sum-ii/)|**有重复数字，但每个数字只能用一次**,利用了set去重|
+|:two::fire:[39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)|**无重复数字，但每个数字可以重复使用**。需要通过剪枝去除不必要的计算，去重手法非常关键，有点完全背包的感觉|
+|:two::fire:[40. 组合总和 II](https://leetcode-cn.com/problems/combination-sum-ii/)|**有重复数字，但每个数字只能用一次**。 去重手法非常关键，有点完全背包的感觉|
 |[216. 组合总和 III](https://leetcode-cn.com/problems/combination-sum-iii/)|大同小异|
 
 ### 第4部分：排列问题
 |题目|知识点|
 :-|:-|
-|[47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)|每个数字只能用一次，但是有重复数字。需要考虑**去重**。剪枝的条件是`if(i - 1 >= 0 && nums[i] == nums[i - 1] && used[i - 1] == false)`|
+|:two::fire:[47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)|每个数字只能用一次，但是有重复数字。需要考虑**去重**。剪枝的条件是`if(i - 1 >= 0 && nums[i] == nums[i - 1] && used[i - 1] == false)`|
 
 
 ### 第5部分：剪枝
@@ -176,7 +177,7 @@
 |[55. 跳跃游戏](https://leetcode-cn.com/problems/jump-game/)|定一个最大值，然后用`nums[i] + i`不断去更新最大值，如果最大值小于等于`i`，说明无法到达终点|
 |:one::star:[134. 加油站](https://leetcode-cn.com/problems/gas-station/)|如果从第`i`个点无法走到第`j`个点，那么说明`[i + 1, j - 1]`中的所有点都走不到第`j`个点|
 |:one::fire::star:[135. 分发糖果](https://leetcode-cn.com/problems/candy/)|**贪心+记忆化搜索**；问题可以转化为从`ratings[i]`为中心，能向左右走的**最大步数**，因为分数可以理解为台阶，从高台阶可以走到低台阶。|
-|[334. 递增的三元子序列](https://leetcode-cn.com/problems/increasing-triplet-subsequence/)|双指针贪心，非常巧妙，并不需要求出递增三元子序列，只需要去判断|
+|:two::fire:[334. 递增的三元子序列](https://leetcode-cn.com/problems/increasing-triplet-subsequence/)|双指针贪心，非常巧妙，并不需要求出递增三元子序列，只需要去判断|
 |:one:[376. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)|先**去除vector中的重复元素**选择极大或极小值|
 |:fire:[402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)|有一些边界条件需要注意，比如说去除前导零|
 |:star:[435. 无重叠区间](https://leetcode-cn.com/problems/non-overlapping-intervals/)|**区间调度问题**，可以从正反两个方面去考虑。正面：将**区间按左边界升序排序**，如果两个区间出现重叠，那就选择右区间小的那个区间。反向思考：**[求出最多不重复的区间](https://leetcode-cn.com/problems/non-overlapping-intervals/solution/tan-xin-suan-fa-zhi-qu-jian-diao-du-wen-ti-by-labu/)**，这是将区间按照右边界升序排序的|
@@ -221,8 +222,8 @@
 |[154. 寻找旋转排序数组中的最小值 II](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/)|和上一题思路一样，**删除重复部分保证两段性**|
 |:two::fire:[162. 寻找峰值](https://leetcode-cn.com/problems/find-peak-element/)|二分的思想就是：**根据某种情况，直接能去掉一半元素**。这道题只是要求我们返回任意一个顶峰，所以我们只需要确定任意一半至少含有一个顶峰就行了，另外一半可以舍弃，我们只需要将`nums[mid]`和`nums[mid+1]`作比较就可以了。**这道题不是有序数组但是却可以用二分法去做**|
 |:one::fire:[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)|技巧题，以矩阵的**右上角**为起点，判断该点是否等于target，如果`matrix[i][j] > target`，说明`j`列以下的所有数都大于`target`,所以删除第`j`列；行同理|
-|:one::star:[287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)|利用**抽屉原理**。|
-|:one::star:[378. 有序矩阵中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)|**值域搜索**,可行解在一个区间内查找，判断这个解是否成立|
+|:two::fire:[287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)|利用**抽屉原理**。|
+|:three::fire:[378. 有序矩阵中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)|**值域搜索**,可行解在一个区间内查找，判断这个解是否成立|
 |[532. 数组中的 k-diff 数对](https://leetcode-cn.com/problems/k-diff-pairs-in-an-array/)|**sort+set去重+二分**|
 |[540. 有序数组中的单一元素](https://leetcode-cn.com/problems/single-element-in-a-sorted-array/)|用位运算很好做，用二分比较难想，而且细节很多|
 |:star:[875. 爱吃香蕉的珂珂](https://leetcode-cn.com/problems/koko-eating-bananas/)|难点在于**除法向上取整问题**，**(被除数 + 除数 - 1) / 除数**|
@@ -232,7 +233,7 @@
 
 ## 双指针
 > 1.有时候使用双指针前需要先排序
-> 
+> 2.循环不变量题型：一个指针遍历所有元素，另一个指针指向可插入位置
 |题目|知识点|
 :-|:-|
 |:one::fire:[11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/)|脑筋急转弯，做法可以用反证法证明|
@@ -241,6 +242,7 @@
 |:star:[26. 删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)|一个指针指向能插入的位置，另一个指针指向待插入的元素。判断一个数是不是能被插入的方法是：判断这个数是不是和前一个数相等|
 |:one::fire:[56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)|**按左端点升序排序**，如果区间重复，则将区间合并为一个区间。**经典字符串题目**|
 |[80. 删除排序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/)|这个题和前一道题的区别在于，这道题可以允许有一个数字出现两次。这两道题不难，但写出简洁的代码是有难度的|
+|:fire:[283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)|经典题目|
 |:star:[392. 判断子序列](https://leetcode-cn.com/problems/is-subsequence/)|**字串匹配问题，思想不要被限制，我一直在想用hash做。如果有大量待匹配字串，该如何提速呢？**|
 |:star:[658. 找到 K 个最接近的元素](https://leetcode-cn.com/problems/find-k-closest-elements/)|**反向思考！！**。保留K个元素，就相当于删除n - k个元素。我一开始的想法是从最接近x的数向外搜索，其实可以转化为从两边删除逼近x|
 
@@ -266,6 +268,7 @@
 |:fire:[200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)|经典题目|
 |[329. 矩阵中的最长递增路径](https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/)|**DFS+记忆化**|
 |[386. 字典序排数](https://leetcode-cn.com/problems/lexicographical-numbers/)|先序DFS，以1-9为根节点，DFS中每次能选择0-9，相当于十叉树的先序遍历|
+|:one::fire:[394. 字符串解码](https://leetcode-cn.com/problems/decode-string/)|这个题的技巧性很强。主要思想就是用递归去处理。如果是字符，那就添加到当前层的结果字符串上；如果不是，那就把数字求出来，然后去递归处理`[]`里的剩余字符串|
 |:star:[417. 太平洋大西洋水流问题](https://leetcode-cn.com/problems/pacific-atlantic-water-flow/)|**反向DFS**，从目标点向起点反向搜索 |
 ## BFS
 
@@ -289,14 +292,14 @@
 |:smile::fire:[169. 求众数I](https://leetcode-cn.com/problems/majority-element/)|找到一个数字的出现个数是大于n/2的，利用**摩尔投票法**，数字相同就将计数值加1，不相同就减1，如果减到零就换人，最后剩下的那个元素就是答案|
 |:two::fire:[172. 阶乘后的零](https://leetcode-cn.com/problems/factorial-trailing-zeroes/)|这道题绝不能真的把阶乘算出来。**两个数组相乘末尾产生零一定是因为两个数有因子2和5**，所以问题可以转化为计算`n!`最多可以分解出多少2和5？有因为2比5多，所有问题又能转化为`n!`最多能分解出多少5|
 |:three::fire:[202. 快乐数](https://leetcode-cn.com/problems/happy-number/)|一个数可以转化为其每一位的数的平方之和，判断最终能不能转化为1.类似与求环问题，可以往双指针上去思考|
-|[**204. 计数质数**](https://leetcode-cn.com/problems/count-primes/)|判断素数的时候可以优化，只需要在[2, sqrt(n)]范围内看能不能被整除就可以了。更优化的算法是空间换时间，当一个数是素数时，这个数的倍数都不是素数。在这个基础上还能优化|
+|:three::star:[204. 计数质数](https://leetcode-cn.com/problems/count-primes/)|判断素数的时候可以优化，只需要在[2, sqrt(n)]范围内看能不能被整除就可以了。更优化的算法是空间换时间，当一个数是素数时，这个数的倍数都不是素数。在这个基础上还能优化|
 |[229. 求众数 II](https://leetcode-cn.com/problems/majority-element-ii/)|**如果要选出现个数超过n/m(2,3,4,5,6)的元素，那么最多有m - 1个答案**。这道题让求大于n/3的答案，所以最多有两个数。同样利用**摩尔投票法**，创建两个候选人，然后遍历整个数组去配对，然后检查候选人的票数是否大于n/3|
 |[258. 各位相加](https://leetcode-cn.com/problems/add-digits/)|引入了数根的概念，了解一下数根的作用和计算|
-|[263. 丑数](https://leetcode-cn.com/problems/ugly-number/)|了解什么是丑数|
-|:star:[264. 丑数 II](https://leetcode-cn.com/problems/ugly-number-ii/)|这道题要充分利用丑数的自身性质，有点类似于求质数那道题的思想：利用已经有的质数去生成新的质数。方法一：大小堆优化筛法。方法二：**归并排序**+DP，所谓归并，由于因子有2，3，5，所有丑数可以表示成小的丑数×2、×3、×5，每次都选择最小的那个数字，然后移动下标（相等的话同时后移，防止重复），最终完成顺序输出丑数|
+|:two:[263. 丑数](https://leetcode-cn.com/problems/ugly-number/)|了解什么是丑数|
+|:two::star:[264. 丑数 II](https://leetcode-cn.com/problems/ugly-number-ii/)|这道题要充分利用丑数的自身性质，有点类似于求质数那道题的思想：利用已经有的质数去生成新的质数。方法一：大小堆优化筛法。方法二：**归并排序**+DP，所谓归并，由于因子有2，3，5，所有丑数可以表示成小的丑数×2、×3、×5，每次都选择最小的那个数字，然后移动下标（相等的话同时后移，防止重复），最终完成顺序输出丑数|
 |:star:[306. 累加数](https://leetcode-cn.com/problems/additive-number/)|方法一：利用`istringstream`将`string`转换成`long long`。方法二：**利用字符串的大数加法去处理溢出**|
-|[313. 超级丑数](https://leetcode-cn.com/problems/super-ugly-number/)|**n指针归并**，主要思想和264一样|
-|[326. 3的幂](https://leetcode-cn.com/problems/power-of-three/)|如果一个数num是3的幂，那么必然有`log3(num)`为整数，那么可以通过**换底公式**得出`log10(num)/log10(3)`，如果运算结果是整数，那么就是3的幂。向下取整的函数：`floor()`|
+|:two::fire:[313. 超级丑数](https://leetcode-cn.com/problems/super-ugly-number/)|**n指针归并**，主要思想和264一样|
+|:two::fire:[326. 3的幂](https://leetcode-cn.com/problems/power-of-three/)|如果一个数num是3的幂，那么必然有`log3(num)`为整数，那么可以通过**换底公式**得出`log10(num)/log10(3)`，如果运算结果是整数，那么就是3的幂。向下取整的函数：`floor()`|
 |[342. 4的幂](https://leetcode-cn.com/problems/power-of-four/)|方法一：换底公式，这个方法适用于所有判断某个数是不是n的幂。方法二：先判断这个数是不是2的幂，如果是，再看这个数对3取余是不是为1，因为4的幂次对3取余必为1|
 |[365. 水壶问题](https://leetcode-cn.com/problems/water-and-jug-problem/)|巧的一逼，不想去想了|
 |[367. 有效的完全平方数](https://leetcode-cn.com/problems/valid-perfect-square/)|和69题的方法一样，**二分查找**|
@@ -387,8 +390,6 @@
 |:two::fire:[189. 旋转数组](https://leetcode-cn.com/problems/rotate-array/)|**将数组循环右移k位**， 有一个巧妙的方法叫三次翻转法：①先把整个数组翻转②再把前k个元素翻转③最后再翻转后n-k个元素|
 |:star:[289. 生命游戏](https://leetcode-cn.com/problems/game-of-life/)|矩阵中某个位置的状态如果发生改变，那么这种题的解法一般是**两次遍历这个矩阵**。第一次遍历时，**用一个不可能在矩阵中出现的中间值来保存状态的变化**（这样在此次遍历时，不影响其他位置的判断）；第二遍遍历时，把中间刷新为变化后应该变成的值|
 |[303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/)|利用**前缀和**技巧提高查询区间和的速度|
-|:star:[442. 数组中重复的数据](https://leetcode-cn.com/problems/find-all-duplicates-in-an-array/)|**将数组元素映射为数组下标，原地取反表示已经被访问过**，要注意这个条件`1 ≤ a[i] ≤ n (n = 数组大小)的整型数组`|
-|[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)|和**442**使用了相同的思想|
 |[463. 岛屿的周长](https://leetcode-cn.com/problems/island-perimeter/)|常规方法是DFS。但是可以利用**岛屿数量和相邻的边数计算周长**|
 |:fire::star:[498. 对角线遍历](https://leetcode-cn.com/problems/diagonal-traverse/)|技巧性极度强|
 |:star:[566. 重塑矩阵](https://leetcode-cn.com/problems/reshape-the-matrix/)|**将一维矩阵转换成任意m * n的矩阵：`matrix[i / col][i % col] = nums[i]`**|
@@ -409,7 +410,8 @@
 |[231. 2的幂](https://leetcode-cn.com/problems/power-of-two/)|如果一个数是二的幂，那么这个数的二进制的第一位必为1，其余位为0。则n - 1的首位为0，其余位为1|
 |[260. 只出现一次的数字 III](https://leetcode-cn.com/problems/single-number-iii/)|因为有两个只出现一次的数，如果我们把原数组分成两个数组，出现一个的那两个数分别在这两个数组中，那么在这两个数组内做异或运算，那么就能得到只出现一次的那个数。关键点在于如何找到第一个为1的位置，构造一个数，把这个位置1，其余位置0|
 |:star:[318. 最大单词长度乘积](https://leetcode-cn.com/problems/maximum-product-of-word-lengths/)|这道题最难的点在于如何判断两个单词是否不包含相同字母。一个int类型数有32位，26个英文字母每个对应一位，把单词中所有字母的相应位置1，然后两个单词做位与运算，如果结果是0，说明包含的字母不存在相同的|
-|:star:[371. 两整数之和](https://leetcode-cn.com/problems/sum-of-two-integers/)|**两数相与相当于是做了不进位加法；两数异或再右移一位相当于计算出两数加法的进位**，将相与和异或右移一位的结果相加知道进位为0，就得到了最终结果。至于为什么减法也能当加法来做，这归功于**补码**|
+|:one::fire:[338. 比特位计数](https://leetcode-cn.com/problems/counting-bits/)|i的二进制含有几个1可以由`i >> 1`的二进制含有几个1递推而来。`dp[i] = dp[i >> 1] + (i & 1)`|
+|:two::fire:[371. 两整数之和](https://leetcode-cn.com/problems/sum-of-two-integers/)|**两数相与相当于是做了不进位加法；两数异或再右移一位相当于计算出两数加法的进位**，将相与和异或右移一位的结果相加知道进位为0，就得到了最终结果。至于为什么减法也能当加法来做，这归功于**补码**|
 |:star:[405. 数字转换为十六进制数](https://leetcode-cn.com/problems/convert-a-number-to-hexadecimal/)|**模板题，C++不允许对负数执行移位运算，在对负数进行移位运算的时候需要把int转换成unsigned int**|
 |:star:[476. 数字的补数](https://leetcode-cn.com/problems/number-complement/)|**1.构造一个n位全1的数字t。2.用这个数字和原数字做异或操作**，这样就可以得到原数字的补码。**正整数不包括0**|
 
@@ -469,6 +471,7 @@
 ## 哈希表
 
 > 1、判断一些数中有没有出现某个数
+> 2、原地哈希，利用数组中元素的值和下标建立映射
 
 |题目|知识点|
 :-|:-|
@@ -476,6 +479,7 @@
 |:one::star:[30. 串联所有单词的子串](https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/)|**双哈希**，第一个hash记录所有字典里的单词，第二个哈希记录当前遍历的单词。这个题有很多细节，很容易错|
 |[30. 串联所有单词的子串](https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/)|给出多个长度相同的单词，找包含这些单词的所有**连续子串**，因为单词之间的排列可以有很多种，所以很难去进行字符串之间的匹配，所以可以转而去考虑每个单词出现的次数，如果当前匹配的子串目标单词出现的次数和字典中单词出现的次数是一样的话，就说明匹配成功|
 |:two::star:[36. 有效的数独](https://leetcode-cn.com/problems/valid-sudoku/)|board中的整数被限制在0~9中，因此可以分别建立哈希表来存储任意一个数在相应维度上是否出现过。这道题的主要难点在于如何判断board[i][j]是否在其属于的哪个3×3的表中出现过。9×9的矩阵可以理解为9个3×3的矩阵，要做的就是通过i,j确定board[i][j]在哪一个3×3的矩阵里，公式就是j / 3 + (i / 3) * 3|
+|:one:[41. 缺失的第一个正数](https://leetcode-cn.com/problems/first-missing-positive/)|利用原数组进行**原地哈希**，将`nums[i]`映射到`i - 1`，如果`nums[nums[i] - 1] == nums[i]`表示`nums[i]`放对了位置|
 |[49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)|所谓的异构词，就是按字典序排序后相同的字符串，所以先排序，然后再哈希。这种类似的题周赛出现过，要从字符串本身找出规律|
 |:one::fire::star:[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/)|经典哈希题目，这个题的思想要熟练|
 |:two::fire:[138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)|双哈希；没想到用vector保存新的链表结点并用下标做映射|
@@ -486,6 +490,8 @@
 |[352. 将数据流变为多个不相交区间](https://leetcode-cn.com/problems/data-stream-as-disjoint-intervals/)|**两个order_map存储区间**，左端点->右端点，右端点->左端点，当插入一个点进去的时候要去判断是否和左右两个区间相交，如果相交，合并区间后要删除之前的映射关系|
 |[383. 赎金信](https://leetcode-cn.com/problems/ransom-note/)|遇到英文字母和其出现个数的映射时，可以直接用vector来存储映射关系|
 |:one:[409. 最长回文串](https://leetcode-cn.com/problems/longest-palindrome/)|一个字母可以构成`n / 2`对，也就是`(n / 2) * 2`个，如果还有剩余字符，可以放到最中间，总字符数加1|
+|:two::star:[442. 数组中重复的数据](https://leetcode-cn.com/problems/find-all-duplicates-in-an-array/)|**将数组元素映射为数组下标，原地取反表示已经被访问过**，要注意这个条件`1 ≤ a[i] ≤ n (n = 数组大小)的整型数组`|
+|:two::fire:[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)|和**442**使用了相同的思想|
 |:two::fire::star:[454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)|经典哈希题目，先计算出前两个数的所有可能的和，并保存在map中；再遍历后两个数的和，看是否等于前两个数的和的相反数|
 |[429. N叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)|记录每一层的数量统一遍历|
 |:one::fire::star:[454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)|相当于从四个等长数组中每个选一个数，判断四数之和是否为0。**利用map存放前两个数组每个数相加的和(key)，val为和出现的次数，然后再去计算第三个第四个数组中所有数字的和，看其相反数有没有出现在map中**，这个题和18题的区别在于，这道题**不用去重**，所以可以使用hash|
@@ -596,6 +602,7 @@
 
 |题目|知识点|
 :-|:-|
+|:one::fire:[347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)|**重点看优先队列的自定义排序函数**，要写成`struct`的形式|
 |[373. 查找和最小的K对数字](https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/)|这道题主要难点在于怎么写priority_queue的cmp函数，**大堆小于号，小堆大于号**|
 |:star:[692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/)|这道题有助于理解优先队列的排序函数的本质。排序函数是比较两个参数的**优先级**，**如果返回值是true,表明第一个参数优先级大**，反之第二个参数优先级大。在优先队列中，**优先级大的元素在堆底部，优先级小的元素在堆顶**|
 |:one::star:[1642. 可以到达的最远建筑](https://leetcode-cn.com/problems/furthest-building-you-can-reach/)|**贪心+小根堆**|
@@ -648,6 +655,7 @@
 |[22. 括号生成](https://leetcode-cn.com/problems/generate-parentheses/)|**1.任意前缀中，`(` 个数大于等于`)`个数。2.左右括号数量相等**。模板题，没记住|
 |[31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)|忘了怎么做|
 |[33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)|没写出来最优写法|
+|[41. 缺失的第一个正数](https://leetcode-cn.com/problems/first-missing-positive/)|利用原数组原地哈希|
 |[48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/)|忘了怎么做了|
 |[50. Pow(x, n)](https://leetcode-cn.com/problems/powx-n/)|忘了怎么做|
 |[54. 螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/)|模板题目，背过|
@@ -675,4 +683,15 @@
 |[202. 快乐数](https://leetcode-cn.com/problems/happy-number/)|脑筋急转弯，背过|
 |[221. 最大正方形](https://leetcode-cn.com/problems/maximal-square/)|忘记怎么做了，这题不好想|
 [227. 基本计算器 II](https://leetcode-cn.com/problems/basic-calculator-ii/)|稍微有点忘，当前运算符比栈顶运算符优先级小于等于时才需要弹栈|
-
+|[287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)|忘了，这题技巧性很强|
+|[292. Nim 游戏](https://leetcode-cn.com/problems/nim-game/)|忘了怎么做|
+|[300. 最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)|二分的做不会|
+|[313. 超级丑数](https://leetcode-cn.com/problems/super-ugly-number/)|忘了怎么做|
+|[326. 3的幂](https://leetcode-cn.com/problems/power-of-three/)|忘了怎么写|
+|[334. 递增的三元子序列](https://leetcode-cn.com/problems/increasing-triplet-subsequence/)|和300一样的做法，这类题多做几遍|
+|[337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/)|忘了咋做|
+|[338. 比特位计数](https://leetcode-cn.com/problems/counting-bits/)|不会做，记住|
+|[347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)|如何写优先队列的自定义函数忘记了|
+|[371. 两整数之和](https://leetcode-cn.com/problems/sum-of-two-integers/)|位运算的脑筋急转弯，背过|
+|[378. 有序矩阵中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)|做法忘记了|
+|[394. 字符串解码](https://leetcode-cn.com/problems/decode-string/)|很恶心的题|
